@@ -1,0 +1,204 @@
+
+<!-- productonsale-area-start -->
+<div class="productonsale-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="new-product">
+          {% if section.settings.collection_title != ''  %}
+          <div class="section-title">
+            <h2>{{ section.settings.collection_title }}</h2>
+          </div>
+          {% endif %}
+          <div class="row">
+            {% if section.settings.banner_enable %}
+            <div class="col-lg-4 left col-md-4 col-sm-12 col-xs-12">
+              <div class="banner mb-30">
+                <div class="banner-img">
+                  <a href="{{ section.settings.banner_img_url }}"><img src="{% if section.settings.banner_img %}{{ section.settings.banner_img | img_url: 'master' }}{% else %}http:\/\/via.placeholder.com\/390x270{% endif %}" alt="banner" /></a>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <div class="{% if section.settings.banner_enable %}col-lg-8 right col-md-8{% else %}col-lg-12 col-md-12{% endif %} col-sm-12 col-xs-12">
+              <!-- saleproduct-active-4-start -->
+              <div class="saleproduct-active-4 saleproduct-active-4-new">
+                {% assign collection = collections[section.settings.collection] %}
+                {% for product in collection.products %}
+                {% include 'product-grid-item' %}
+                {% endfor %}
+              </div>
+              <!-- saleproduct-active-4-start -->
+            </div>
+          </div>	 
+        </div>	
+      </div>
+    </div>
+  </div>
+</div>
+<!-- productonsale-area-end -->
+
+
+<style>
+ 
+  .productonsale-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .productonsale-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style> 
+
+<script>
+  
+  /*----------------------------
+ saleproduct-active-4
+------------------------------ */  
+  $(".saleproduct-active-4-new").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+    items : {{ section.settings.product_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.product_coloum }}],
+	  itemsDesktopSmall : [992,{{ section.settings.product_coloum }}],
+	  itemsTablet: [768,2],
+	  itemsMobile : [479,1],
+  });
+        
+  
+</script>
+
+
+
+{% schema %}
+  {
+    "name": "Product Onsale",
+    "settings": [
+		{
+            "type": "header",
+            "content": "Section Padding"
+        },
+        {
+            "type": "text",
+            "id": "section_padding_top",
+            "label": "Section Padding Top",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+            "type": "text",
+            "id": "section_padding_bottom",
+            "label": "Section Padding Bottom",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+		{
+            "type": "header",
+            "content": "Section Title"
+        },
+		{
+           "type": "text",
+           "id": "collection_title",
+           "label": "Section Title",
+		   "default": "new-product"
+		},
+		{
+            "type": "header",
+            "content": "Image Area"
+        },
+        {
+           "type": "checkbox",
+           "id": "banner_enable",
+           "label": "Show Banner Image",
+           "default": true
+        },
+		{
+			"type": "image_picker",
+			"id": "banner_img",
+			"label": "Image",
+			"info": "Recommended Size: 390 x 270px"
+		},
+		{
+			"type": "url",
+			"id": "banner_img_url",
+			"label": "URL"
+		},
+		{
+            "type": "header",
+            "content": "Cursole Product"
+        },
+		{
+           "type": "collection",
+           "id": "collection",
+           "label": "select your collection"
+		},
+        {
+          "type": "select",
+          "id": "product_coloum",
+          "label": "Product Limit",
+          "options":[
+            {
+            	"value":"3",
+           	 	"label": "3 products"
+            },
+            {
+            	"value":"4",
+            	"label": "4 products"
+            },
+            {
+            	"value":"5",
+            	"label": "5 products"
+            },
+            {
+            	"value":"6",
+            	"label": "6 products"
+            },
+            {
+            	"value":"7",
+            	"label": "7 products"
+            },
+            {
+            	"value":"8",
+            	"label": "8 products"
+            },
+            {
+            	"value":"9",
+            	"label": "9 products"
+            },
+            {
+            	"value":"10",
+            	"label": "10 products"
+            },
+            {
+            	"value":"11",
+            	"label": "11 products"
+            },
+            {
+            	"value":"12",
+            	"label": "12 products"
+            }
+
+          ],
+
+         "default": "4"
+        }
+	],
+	"presets":[
+		{
+			"name": "Product OnSale",
+			"category": "product"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

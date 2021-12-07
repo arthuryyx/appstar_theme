@@ -1,0 +1,227 @@
+<!-- entry-header-area-start -->
+<div class="entry-header-area pt-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="entry-header-title">
+          <h2>{{ section.settings.section_title }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- entry-header-area-end -->
+<!-- cart-main-area-start -->
+<div class="cart-main-area pb-80">
+  <div class="container">
+    <div class="row">
+
+      {% if cart.item_count > 0 %}
+      <form action="/cart" method="post" novalidate enctype="multipart/form-data">
+        <div class="col-lg-12">
+          <div class="table-content table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th class="product-thumbnail">{{ section.settings.image_title }}</th>
+                  <th class="product-name">{{ section.settings.product_title }}</th>
+                  <th class="product-price">{{ section.settings.price_title }}</th>
+                  <th class="product-quantity">{{ section.settings.quantity_title }}</th>
+                  <th class="product-subtotal">{{ section.settings.totle_title }}</th>
+                  <th class="product-remove">{{ section.settings.remove_title }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% assign i = 1 %}
+                {% for item in cart.items %}
+                <tr>
+                  <td class="product-thumbnail"><a href="{{ item.url }}"><img src="{{ item | img_url: 'compact' }}" alt="man" /></a></td>
+                  <td class="product-name"><a href="{{ item.url }}">{{ item.title }}</a></td>
+                  <td class="product-price"><span class="amount">{{ item.price | money }}</span></td>
+                  <td class="product-quantity"><input type="number" value="{{ item.quantity }}" name="updates[]"></td>
+                  <td class="product-subtotal">{{ item.line_price | money }}</td>
+                  <td class="product-remove"><a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"><i class="fa fa-times"></i></a></td>
+                </tr>
+                {% assign i = 1 | plus: 1 %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <div class="buttons-cart mb-30">
+              <ul>
+                <li><button class="button" name="update">{{ section.settings.update_cart_button_title }}</button></li>
+                <li><a href="/collections/all">{{ section.settings.continiue_shopping_button_title }}</a></li>
+              </ul>
+            </div>
+            <div class="coupon">
+              <h3>{{ section.settings.coupon_title }}</h3>
+              <p>{{ section.settings.coupon_commend }}</p>
+              <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="cart_totals">
+              <h2>{{ section.settings.checkout_title }}</h2>
+              <table>
+                <tbody>
+                  <tr class="cart-subtotal">
+                    <th>{{ section.settings.subtotal }}</th>
+                    <td>
+                      <span class="amount">{{ cart.total_price | money }}</span>
+                    </td>
+                  </tr>
+                  <tr class="order-total">
+                    <th>{{ section.settings.grand_total }}</th>
+                    <td>
+                      <strong>
+                        <span class="amount">{{ cart.total_price | money }}</span>
+                      </strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="wc-proceed-to-checkout">
+                <a href="/checkout" class="button">{{ section.settings.checkout_button_title }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      {% else %}
+
+      <div class="car-heading">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                 <h2>Cart is Empty</h2>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      {% endif %}  
+
+    </div>
+  </div>
+</div>
+<!-- cart-main-area-end -->
+
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Cart Page",
+    "settings": [
+		{
+			"type": "text",
+			"id": "section_title",
+			"label": "Section Title",
+			"default": "Cart"
+		},
+        {
+            "type": "header",
+            "content": "Table Heading"
+        },
+        {
+            "type": "text",
+            "id": "image_title",
+            "label": "Image Title",
+            "default": "Image Title"
+        },
+        {
+            "type": "text",
+            "id": "product_title",
+            "label": "Product Title",
+            "default": "Product Title"
+        },
+        {
+            "type": "text",
+            "id": "price_title",
+            "label": "Price Title",
+            "default": "Price Title"
+        },
+        {
+            "type": "text",
+            "id": "quantity_title",
+            "label": "Quentity Title",
+            "default": "Quentity Title"
+        },
+        {
+            "type": "text",
+            "id": "totle_title",
+            "label": "Total Title",
+            "default": "Total Title"
+        },
+        {
+            "type": "text",
+            "id": "remove_title",
+            "label": "Remove Title",
+            "default": "Remove Title"
+        },
+        {
+            "type": "header",
+            "content": "Table Bottom"
+        },
+        {
+            "type": "text",
+            "id": "update_cart_button_title",
+            "label": "Update Cart Button",
+            "default": "Update Cart"
+        },
+        {
+            "type": "text",
+            "id": "continiue_shopping_button_title",
+            "label": "Continue Shopping Button",
+            "default": "Continue Shopping"
+        },
+        {
+            "type": "text",
+            "id": "coupon_title",
+            "label": "Coupon Title",
+            "default": "Coupon"
+        },
+        {
+            "type": "text",
+            "id": "coupon_commend",
+            "label": "Coupon Commend",
+            "default": "Enter your coupon code if you have one."
+        },
+        {
+            "type": "text",
+            "id": "checkout_title",
+            "label": "Process Checkout title",
+            "default": "Process Checkout"
+        },
+        {
+            "type": "text",
+            "id": "subtotal",
+            "label": "Subtotal Title",
+            "default": "Subtotal Title"
+        },
+        {
+            "type": "text",
+            "id": "grand_total",
+            "label": "Grand Total",
+            "default": "Grand Total"
+        },
+        {
+            "type": "text",
+            "id": "checkout_button_title",
+            "label": "Checkout Button Title",
+            "default": "process to checkout"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

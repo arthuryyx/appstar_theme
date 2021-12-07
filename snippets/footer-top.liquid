@@ -1,0 +1,54 @@
+<div class="footer-top">
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+      {% case  block.type %}
+      {% when 'footer_logo' %}
+      <div class="col-lg-{{ block.settings.footer_info_coloum }} col-md-6 col-sm-6 col-xs-12">
+        <!-- single-footer-start -->
+        <div class="single-footer">
+          <div class="footer-logo">
+            {% if block.settings.footer_logo %}
+            <a href="/"><img src="{{ block.settings.footer_logo | img_url: 'compact' }}" alt="{{ shop.name }}" /></a>
+            {%  else %}
+             <a href="/" style="display:none;">{{ shop.name }}</a>
+            {% endif %}
+          </div>
+          <div class="footer-test">
+            <p>{{ block.settings.footer_description }}</p>
+            <div class="footer-title"><h3>{{ block.settings.contact_title }}</h3></div>
+            {% if block.settings.contact_info != '' %}
+            <h4>{{ block.settings.contact_info }}</h4>
+            {% endif %}
+            <ul>
+              {% include 'social-icon' %}
+            </ul>
+          </div>
+        </div>
+        <!-- single-footer-end -->
+      </div>
+      
+      {% when 'footer_menu' %}
+      <div class="col-lg-{{ block.settings.footer_menu_coloum }} col-md-6 col-sm-6 col-xs-12">
+        <!-- single-footer-start -->
+        <div class="single-footer">
+          <div class="footer-title">
+            <h3>{{ block.settings.footer_menu_title }}</h3>
+          </div>
+          <div class="footer-menu">
+            <ul>
+              {% assign footer_menu = block.settings.footer_menu_handle %}
+              {% for link in linklists[footer_menu].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %} 
+            </ul>
+          </div>
+        </div>
+        <!-- single-footer-end -->
+      </div>
+    {% endcase %}
+    {% endfor %}
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+{% if section.settings.skill_enable %}
+
+<!-- skill-area-start -->
+<div class="skill-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="skill-content">
+          <h3>{{ section.settings.skill_content_title }}</h3>
+          <p>{{ section.settings.skill_descrription }}</p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="skill-progress">
+          <div class="progress">
+            <div class="skill-title">{{ section.settings.progress_title_1 }} {{ section.settings.progress_number_1 }}</div>
+            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.2s" role="progressbar" style="width: 79%;">
+            </div>
+          </div>	
+          <div class="progress">
+            <div class="skill-title">{{ section.settings.progress_title_2 }} {{ section.settings.progress_number_2 }}</div>
+            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.3s" role="progressbar" style="width: 96%;">
+            </div>
+          </div>	
+          <div class="progress">
+            <div class="skill-title">{{ section.settings.progress_title_3 }} {{ section.settings.progress_number_3 }}</div>
+            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.4s" role="progressbar" style="width: 65%;">
+            </div>
+          </div>	
+          <div class="progress">
+            <div class="skill-title">{{ section.settings.progress_title_4 }} {{ section.settings.progress_number_4 }}</div>
+            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.3s" role="progressbar" style="width: 89%;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- skill-area-end -->
+{% endif %}
+
+
+<style>
+ 
+  .skill-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .skill-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style>
+
+{% schema %}
+  {
+    "name": "Skill Area",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "skill_enable",
+        "label": "Show Skill",
+        "default": true
+      },
+	  {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "0" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+		"type": "header",
+		"content": "Skill Content"
+	  },
+	  {
+		"type": "text",
+		"id": "skill_content_title",
+		"label": "Skill Content",
+		"default": "Why Choose<span>Domino</span>HTML Template",
+		"info": "Use Of span Highlight Title"
+	  },
+	  {
+		"type": "text",
+		"id": "skill_descrription",
+		"label": "Skill Description",
+		"default": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. sed diam voluptua ater vero. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumys eirmod tempor empor invidunt ut labore et dolore."
+	  },
+	  {
+		"type": "header",
+		"content": "Skill Progress"
+	  },
+	  {
+		"type": "text",
+		"id": "progress_title_1",
+		"label": "Progress Title",
+		"default": "Strategy"
+	  },
+	  {
+		"id": "progress_number_1",
+		"type": "text",
+		"label": "Progress Number",
+		"default": "79%"
+	  },
+	  {
+		"type": "text",
+		"id": "progress_title_2",
+		"label": "Progress Title",
+		"default": "Marketing "
+	  },
+	  {
+		"id": "progress_number_2",
+		"type": "text",
+		"label": "Progress Number",
+		"default": "96%"
+	  },
+	  {
+		"type": "text",
+		"id": "progress_title_3",
+		"label": "Progress Title",
+		"default": "Wordpress Theme"
+	  },
+	  {
+		"id": "progress_number_3",
+		"type": "text",
+		"label": "Progress Number",
+		"default": "65%"
+	  },
+	  {
+		"type": "text",
+		"id": "progress_title_4",
+		"label": "Progress Title",
+		"default": "UI/UX Design"
+	  },
+	  {
+		"id": "progress_number_4",
+		"type": "text",
+		"label": "Progress Number",
+		"default": "92%"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

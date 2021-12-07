@@ -1,0 +1,560 @@
+
+<!-- product-cookware-area-start -->
+<div class="product-cookware-area" id="product-cookware-area-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="{% if section.settings.bestsellerproduct_area_total_enable  %}col-lg-9 col-md-9{% else %}col-lg-12 col-md-12{% endif %} col-sm-12 col-xs-12">
+        <div class="product-header product-header-2">
+          <div class="section-title">
+            <h2>{{ section.settings.section_title }}</h2>
+          </div>
+          <!-- tab-menu-start -->
+          <div class="tab-menu text-right">
+            <ul>
+              {% for block in section.blocks %}
+
+              {% case  block.type %}
+              {% when 'tab_product' %}
+              {% assign collection = collections[block.settings.collection] %}
+              <li class="{% if forloop.last == true %}active{% endif %}"><a href="#{{ section.id }}-{{ collection.title | handle }}" data-toggle="tab">{{ collection.title }}</a></li>
+
+              {% endcase %}
+              {% endfor %}
+              
+              
+            </ul>
+          </div>
+          <!-- tab-menu-end -->
+        </div>
+
+        <!-- tab-area-start -->
+        <div class="tab-content">
+
+          {% for block in section.blocks %}
+          {% case  block.type %}
+          {% when 'tab_product' %}
+          {% assign collection = collections[block.settings.collection] %}
+          <div class="tab-pane {% if forloop.last == true %}active{% endif %}" id="{{ section.id }}-{{ collection.title | handle }}">
+            <div class="row">
+
+              {% include 'tab-with-banner' %}
+
+
+            </div>
+          </div>
+          {% endcase %}
+          {% endfor %}
+
+        </div>
+        <!-- tab-area-end -->
+
+        <!-- saleproduct-active-2-start -->
+        <div class="saleproduct-active-2 saleproduct-active-2-new">
+
+          {% assign collection = collections[section.settings.collection] %}
+          {% for product in collection.products %}
+          <!-- single-product-start -->
+          {% include 'product-grid-item' %}
+          <!-- single-product-end -->
+          {% endfor %}
+
+        </div>
+        <!-- saleproduct-active-2-start -->
+
+        {% if section.settings.banner_img_2_enable %}
+        {% include 'banner-img-tab-fullied' %}
+        {% endif %}
+
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+
+        {% include 'tab-right-sidebar' %}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- product-cookware-area-end -->
+
+<style>
+ 
+  #product-cookware-area-{{ section.id }}.product-cookware-area{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   #product-cookware-area-{{ section.id }}.product-cookware-area{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+
+  
+</style> 
+
+
+
+
+
+<script>
+ 
+/*----------------------------
+ tab-active
+------------------------------ */  
+  $("#product-cookware-area-{{ section.id }} .tab-active-new ").owlCarousel({
+      autoPlay: true, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+    items : {{ section.settings.tab_product_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.tab_product_coloum }}],
+	  itemsDesktopSmall : [980,{{ section.settings.tab_product_coloum }}],
+	  itemsTablet: [768,1],
+	  itemsMobile : [479,1],
+  });
+        
+  
+  
+  /*----------------------------
+ saleproduct-active-2
+------------------------------ */ 
+  
+  
+  $("#product-cookware-area-{{ section.id }} .saleproduct-active-2-new").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+      items : {{ section.settings.product_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.product_coloum }}],
+	  itemsDesktopSmall : [992,{{ section.settings.product_coloum }}],
+	  itemsTablet: [768,2],
+	  itemsMobile : [479,1],
+  });
+      
+
+
+</script>
+
+
+
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Tab With Banner",
+    "settings": [
+	 {
+      	"type": "header",
+      	"content": "Section Margin"
+     },
+     {
+      	"type": "text",
+      	"id": "section_margin_top",
+      	"label": "Section Margin Top",
+      	"default": "0" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+     },
+     {
+      	"type": "text",
+      	"id": "section_margin_bottom",
+      	"label": "Section Margin Bottom",
+      	"default": "0" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title",
+        "default": "Cookware"
+      },
+      {
+        "type": "header",
+        "content": "Tab Product"
+      },
+      {
+        "type": "select",
+        "id": "tab_product_coloum",
+        "label": "Product Limit",
+        "options":[
+          {
+            "value":"1",
+            "label": "1 products"
+          },
+          {
+            "value":"2",
+            "label": "2 products"
+          },
+          {
+            "value":"3",
+            "label": "3 products"
+          }
+
+        ],
+
+        "default": "1"
+      },
+      {
+        "type": "header",
+        "content": "Carousel Product"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "select your collection"
+      },
+      {
+        "type": "select",
+        "id": "product_coloum",
+        "label": "Product Limit",
+        "options":[
+          {
+            "value":"3",
+            "label": "3 products"
+          },
+          {
+            "value":"4",
+            "label": "4 products"
+          },
+          {
+            "value":"5",
+            "label": "5 products"
+          },
+          {
+            "value":"6",
+            "label": "6 products"
+          }
+
+        ],
+
+        "default": "5"
+      },
+      {
+        "type": "checkbox",
+        "id": "banner_img_2_enable",
+        "label": "Show Banner",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_img_2",
+        "label": "Image",
+        "info": "Recommended Size: 870 x 180px"
+      },
+	  {
+		"type": "url",
+		"id": "banner_img_2_url",
+		"label": "URL"
+	  },
+      {
+        "type": "header",
+        "content": "BestSeller"
+      },
+      {
+        "type": "checkbox",
+        "id": "bestsellerproduct_area_total_enable",
+        "label": "Show Bestsellerarea",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "bestsellerproduct_area_enable",
+        "label": "Show Bestseller",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "testimonial_area_enable",
+        "label": "Show TestimonialArea",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "best_seller_title",
+        "label": "Section Title",
+        "default": "best seller"
+      },
+      {
+        "type": "collection",
+        "id": "collection_2",
+        "label": "select your collection"
+      },
+      {
+        "type": "select",
+        "id": "bestselling_limit",
+        "label": "Product Limit",
+        "options":[
+          {					
+            "value":"1",
+            "label": "1 products"
+          },
+          {						
+            "value":"2",
+            "label": "2 products"
+          },
+          {						
+            "value":"3",
+            "label": "3 products"
+          },
+          {						
+            "value":"4",
+            "label": "4 products"
+          },
+          {						
+            "value":"5",
+            "label": "5 products"
+          },
+          {						
+            "value":"6",
+            "label": "6 products"
+          },
+          {						
+            "value":"7",
+            "label": "7 products"
+          },
+          {						
+            "value":"8",
+            "label": "8 products"
+          },
+          {						
+            "value":"9",
+            "label": "9 products"
+          },
+          {					
+            "value":"10",
+            "label": "10 products"
+          },
+          {						
+            "value":"11",
+            "label": "11 products"
+          },
+          {						
+            "value":"12",
+            "label": "12 products"
+          }
+        ],
+
+        "default": "4"
+      },
+      {
+        "type": "checkbox",
+        "id": "banner_3_area_enable",
+        "label": "Show Banner",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_img_3",
+        "label": "Image",
+        "info": "Recommended Size: 270 x 324px"
+      },
+	  {
+		"type": "url",
+		"id": "banner_img_3_url",
+		"label": "URL"
+	  }
+    ],
+    "blocks": [
+	   {
+        "type" : "tab_product",
+        "name" : "tab product",
+        "settings" :[
+          {
+            "type": "checkbox",
+            "id": "single_banner_enable",
+            "label": "Show Banner",
+            "default": true
+          },
+          {
+            "type": "select",
+            "id": "single_banner_coloum",
+            "label": "Banner",
+            "options":[
+              {
+                "label": "1 (1/12)",
+                "value": "1"
+              },
+              {
+                "label": "2 (2/12)",
+                "value": "2"
+              },
+              {
+                "label": "3 (3/12)",
+                "value": "3"
+              },
+              {
+                "label": "4 (4/12)",
+                "value": "4"
+              },
+              {
+                "label": "5 (5/12)",
+                "value": "5"
+              },
+              {
+                "label": "6 (6/12)",
+                "value": "6"
+              },
+              {
+                "label": "7 (7/12)",
+                "value": "7"
+              },
+              {
+                "label": "8 (8/12)",
+                "value": "8"
+              },
+              {
+                "label": "9 (9/12)",
+                "value": "9"
+              },
+              {
+                "label": "10 (10/12)",
+                "value": "10"
+              },
+              {
+                "label": "11 (11/12)",
+                "value": "11"
+              },
+              {
+                "label": "12 (12/12)",
+                "value": "12"
+              }
+            ],
+            "default": "3",
+            "info": "Follow Bootstrap Column"
+          },
+          {
+            "type": "image_picker",
+            "id": "banner_img",
+            "label": "Image",
+            "info": "Recommended Size: 270 x 620px"
+          },
+		  {
+			"type": "url",
+			"id": "banner_img_url",
+			"label": "URL"
+		  },
+          {
+            "type": "select",
+            "id": "tab_coloum",
+            "label": "Tab Coloum",
+            "options":[
+              {
+                "label": "1 (1/12)",
+                "value": "1"
+              },
+              {
+                "label": "2 (2/12)",
+                "value": "2"
+              },
+              {
+                "label": "3 (3/12)",
+                "value": "3"
+              },
+              {
+                "label": "4 (4/12)",
+                "value": "4"
+              },
+              {
+                "label": "5 (5/12)",
+                "value": "5"
+              },
+              {
+                "label": "6 (6/12)",
+                "value": "6"
+              },
+              {
+                "label": "7 (7/12)",
+                "value": "7"
+              },
+              {
+                "label": "8 (8/12)",
+                "value": "8"
+              },
+              {
+                "label": "9 (9/12)",
+                "value": "9"
+              },
+              {
+                "label": "10 (10/12)",
+                "value": "10"
+              },
+              {
+                "label": "11 (11/12)",
+                "value": "11"
+              },
+              {
+                "label": "12 (12/12)",
+                "value": "12"
+              }
+            ],
+            "default": "9",
+            "info": "Follow Bootstrap Column"
+          },
+          {
+            "type" : "collection",
+            "id" : "collection",
+            "label" : "choose collection"
+          }
+        ]
+
+      },
+      {
+        "type" : "testimonial",
+        "name" : "Testimonial",
+        "settings" :[
+		  {
+			"type": "image_picker",
+			"id": "auther_image",
+			"label": "Author Image",
+			"info": "Recommended Size: 107 x 107px"
+		  },
+		  {
+			"type": "textarea",
+			"id": "auther_comments",
+			"label": "Author Description",
+			"default": "All Perfect !! I have three sites with magento , this theme is the best !! Excellent support...",
+			"info": "All Perfect !! I have three sites with magento , this theme is the best !! Excellent support..."
+		  },
+		  {
+			"type": "text",
+			"id": "author_name",
+			"label": "Author Name",
+			"default": "utheya",
+			"info": "utheya"
+		  },
+		  {
+			"type": "text",
+			"id": "author_designation",
+			"label": "Author Designation",
+			"default": "Webdesigner",
+			"info": "Webdesigner"
+		  },
+		  {
+			"type": "text",
+			"id": "author_email",
+			"label": "Author Email",
+			"default": "admin@gmail.com",
+			"info": "admin@gmail.com"
+		  }
+		]
+	  }
+    ],
+    "presets":[
+      {
+        "name": "Tab With Banner",
+        "category": "product"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

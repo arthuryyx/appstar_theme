@@ -1,0 +1,372 @@
+<style>
+
+  ul.tech_bundle_ul{
+  width:99%;display: table;table-layout: fixed; margin: 15px 0px;padding: 0;list-style: none;box-sizing: border-box;
+  }
+
+  ul.tech_bundle_ul li{
+    display: table-cell;height: 100px;margin: 0;margin-bottom: 20px;padding: 0 15px;list-style: none;position: relative;vertical-align: top;box-sizing: border-box;
+  }
+ ul.tech_bundle_ul li:after {
+    content: '+';
+    position: absolute;
+    right: -10px;
+    top: 46%;
+    font-size: 20px;
+    background: #000;
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 500;
+    z-index: 9;
+  }
+
+  ul.tech_bundle_ul li:last-child:after {
+    content: '';
+    width: 0;
+    height: 0;
+	}
+
+  .tech_bundle_product_main{
+      padding: 10px;
+      box-shadow: 1px 1px 1px 2px #eae7e7;
+  }
+
+  .tech_bundle_add_cart_button{
+    width:100%;
+  }
+
+  .tech_bundle_select_varients{
+  	width:-webkit-fill-available
+  }
+ul.tech_bundle_ul li img{
+  	width:100%;
+  }
+  @keyframes tech-btn-loader {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(.55, .055, .675, .19)
+    }
+
+    50% {
+
+        -webkit-transform: rotate(180deg)
+        transform: rotate(180deg);
+        animation-timing-function: cubic-bezier(.215, .61, .355, 1)
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+
+}
+
+
+
+@-webkit-keyframes tech-btn-loader {
+
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        animation-timing-function: cubic-bezier(.55, .055, .675, .19)
+    }
+
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        animation-timing-function: cubic-bezier(.215, .61, .355, 1)
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+
+}
+
+  .tech-btn-loader {
+    -webkit-animation: tech-btn-loader 1s infinite;
+    animation: tech-btn-loader 1s infinite;
+        width: 1.5em;
+    height: 1.5em;
+    position: relative;
+    color: inherit;
+    display: inline-block;
+    margin-left:10px;
+    vertical-align: middle;
+    display:none;
+}
+
+ .tech-btn-loader:after {
+     border-radius: 50%; 
+    border-style: solid;
+       width: 100%;
+    height: 100%;
+       position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: " ";
+    display: inline-block;
+    background: center center no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    border-style: solid;
+   -webkit-background-clip: padding-box;
+    box-sizing: border-box;
+    border-width: .15em;
+    border-color: currentColor currentColor currentColor transparent;
+}
+@media only screen and (max-width: 600px) {
+ ul.tech_bundle_ul li{
+    width:auto;
+   float: none;
+   display:contents;
+  }
+}
+  .tech_bundle_product_main s{
+  color: red
+  }
+
+</style>
+
+{% assign monyformate = shop.money_format %}
+
+{% assign tech_app_status = shop.metafields.techbundle_settings.app_status %}
+{% if tech_app_status == '1' or tech_app_status == 'true' %} 
+	{% assign techbundles = shop.metafields.techbundle %}
+
+ 	{% for techbundle in techbundles %}		
+		{% assign techbundle_active_names = shop.metafields.techbundle_active.enable_bundle | split: ',' %}
+		{% assign techbundle_active_bundle_proccess = false %}
+		{% for techbundle_active_name in techbundle_active_names %}	
+			{% if techbundle contains techbundle_active_name %}
+				{% assign techbundle_active_bundle_proccess = true %}
+				{% assign tech_name_data = techbundle_active_name %}
+			{% endif %}         
+		{% endfor %}
+
+		{% if techbundle_active_bundle_proccess == true %}
+
+		{% assign techbundle_check = techbundle | split: '~' %}					
+
+		{% for techbundle_detail in techbundle_check %}						
+
+			{% if techbundle_detail contains product.id %}	
+
+			{% assign testdatas = techbundle | split: '***' %}
+
+			{% assign tech_name = tech_name | append: testdatas[1] | replace: '.','' %}
+			{% assign tech_name_data = tech_name_data | append: tech_name %}
+            {% assign tech_name_data = tech_name_data | replace: ' ','_' %}
+			<div style="margin:15px 0px;" id="tech_main_wrapper_{{tech_name_data}}">
+
+  				<h4 id="tech_bundle_header{{tech_name}}" style="text-align: center;"></h4>
+
+				<ul id="tech_bundle_wrapper{{tech_name}}" class="tech_bundle_ul"></ul>             
+
+              <button id="tech_bundle_add_cart_button_{{tech_name}}" class="btn tech_bundle_add_cart_button">{{shop.metafields.techbundle_settings.prd_btn_message}}<div class="tech-btn-loader"></div></button>
+
+			</div>
+
+		
+
+			{% for testdata in testdatas %}				
+
+				{% if testdata contains '~' %}					
+
+					{% assign testdataproducts = testdata | split: ',' %}
+
+					{% for testdataproduct in testdataproducts %}	
+
+						{% assign testdataproductidqty = testdataproduct | split: '~' %}	
+
+						{% assign techbundlediscout = testdatas[1] | append : '%' %}
+
+
+
+						<script>	
+
+                          function tech_bundle_ui(){
+        function techformateMoney(cents){
+        if (typeof cents == 'string') {
+            cents = cents.replace('.', '');
+        }
+        var value = '';
+        var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+                               var formatString = '{{shop.money_format | replace: "'", '"' }}';
+
+        function defaultOption(opt, def) {
+            return (typeof opt == 'undefined' ? def : opt);
+        }
+
+        function formatWithDelimiters(number, precision, thousands, decimal) {
+            precision = defaultOption(precision, 2);
+            thousands = defaultOption(thousands, ',');
+            decimal = defaultOption(decimal, '.');
+            if (isNaN(number) || number == null) {
+                return 0;
+            }
+            number = (number / 100.0).toFixed(precision);
+            var parts = number.split('.'),
+                dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+                cents = parts[1] ? (decimal + parts[1]) : '';
+            return dollars + cents;
+        }
+
+        switch (formatString.match(placeholderRegex)[1]) {
+            case 'amount':
+                value = formatWithDelimiters(cents, 2);
+                break;
+            case 'amount_no_decimals':
+                value = formatWithDelimiters(cents, 0);
+                break;
+            case 'amount_with_comma_separator':
+                value = formatWithDelimiters(cents, 2, '.', ',');
+                break;
+            case 'amount_no_decimals_with_comma_separator':
+                value = formatWithDelimiters(cents, 0, '.', ',');
+                break;
+        }
+        return formatString.replace(placeholderRegex, value);
+    }
+
+	                        $.ajax({
+
+        						type: 'GET',
+
+                              	url: '/search?type=product&view=techbundle_product_data&q=id:{{testdataproductidqty[0]}}',       
+
+        						success: function (product_ui) {    
+
+                              		
+
+        							$('#tech_bundle_wrapper{{tech_name}}').append(product_ui);
+
+                              		$('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_qty_{{testdataproductidqty[0]}}').html('{{testdataproductidqty[1] | replace: ']', '' | replace: '"', ''}}');
+
+                              		$('#tech_bundle_header{{tech_name}}').html("{{shop.metafields.techbundle_settings.prd_header_message | replace: '%discount%', techbundlediscout }}");                             		                              
+
+                              		
+
+                              		$('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_selected_varient_{{testdataproductidqty[0]}} option').each(function(){										
+										
+                              			var disc_price=$(this).data("price");                               
+                                    var DiscountPercentage=1-(parseFloat('{{testdatas[1]}}')/100);                              
+                               			disc_price= disc_price*DiscountPercentage;
+                              			if(parseInt($(this).data("orignal-price")) < disc_price){                              
+                             					 let orignal_price=techformateMoney($(this).data('orignal-price'));
+
+                              				$(this).attr("disc-price",orignal_price);
+
+                            			}else{
+                                   disc_price=techformateMoney(disc_price);
+                              				$(this).attr("disc-price",disc_price);
+                                  }
+									})
+
+                            		$('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_selected_varient_{{testdataproductidqty[0]}}').change(function(){                                      	
+
+                                       	$('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_price_{{testdataproductidqty[0]}}').html($('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_selected_varient_{{testdataproductidqty[0]}} option:selected').attr('disc-price'));
+                                        $('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_orignal_price_{{testdataproductidqty[0]}}').html(techformateMoney($('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_selected_varient_{{testdataproductidqty[0]}} option:selected').attr('data-price-cry')));                                   
+                                })
+
+                             	 	$('#tech_main_wrapper_{{tech_name_data}}').find('#tech_bundle_selected_varient_{{testdataproductidqty[0]}}').change();
+
+                                    $('#tech_bundle_add_cart_button_{{tech_name}}').off().on("click",function(){ 
+
+                                      $(this).find('.tech-btn-loader').css("display","inline-block");
+
+                                      	$('#tech_bundle_add_cart_button_{{tech_name}}').attr("disabled","disabled");                                        
+
+                                      	$('#tech_bundle_wrapper{{tech_name}} li').each(function(){
+
+                                    		var bundle_cart_item_data = { id:$(this).find("select option:selected").val(), quantity:$(this).find(".tech_bundle_qty span").html(),properties: {'Bundlo Products Bundle': '{{testdatas[1]}}%'}}
+
+                                       		$.ajax({
+
+									   			                      url: '/cart/add.js',
+                                    			      dataType: 'json',
+
+												                        async: false,
+
+                                    			type: 'post',
+
+                                    			data: bundle_cart_item_data,
+
+                                    			success: function (itemData) {
+
+                                        			console.log("Item added to cart");                                        		
+
+                                    			},
+
+                                    			error: function (XMLHttpRequest) {                                        		
+
+                                        			var response = eval('(' + XMLHttpRequest.responseText + ')');
+
+                                        			response = response.description;
+
+                                        			alert(response);
+
+                                    			}
+
+                                			});
+
+									   	})
+
+                                        window.location.href="/cart";                            			
+
+    								});
+
+        						}
+
+      						});  
+
+                           
+
+                          }
+
+						if(typeof jQuery=='undefined') {
+
+    						var headTag = document.getElementsByTagName("head")[0];
+
+    						var jqTag = document.createElement('script');
+
+    						jqTag.type = 'text/javascript';
+
+    						jqTag.src = 'https://code.jquery.com/jquery-2.2.4.min.js';  
+
+                           	jqTag.onload = tech_bundle_ui;
+
+    						headTag.appendChild(jqTag);
+
+						} else {
+                            $=jQuery;
+     						tech_bundle_ui();
+
+						}
+
+						</script>					
+
+					{% endfor %}
+
+				{% endif %}	
+
+ 			{% endfor %}
+
+			{% endif %}
+
+		{% endfor %}
+
+{% endif %}
+
+	{% endfor %}
+
+{% endif %}

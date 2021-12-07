@@ -1,0 +1,244 @@
+
+<!-- product-cookware-area-start -->
+<div class="product-cookware-area product-cookware-area-3 home-3" id="product-cookware-area-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="product-header">
+          <div class="section-title mr-bttom {% if section.settings.section_border_enable %}section-tittle-border{% endif %}">
+            <h2>{{ section.settings.section_title }}</h2>
+          </div>
+          
+          <!-- tab-menu-start -->
+          <div class="tab-menu text-right">
+            <ul>
+              {% for block in section.blocks %}
+              {% assign collection = collections[block.settings.collection] %}
+              <li class="{% if forloop.first == true %}active{% endif %}"><a href="#{{ section.id }}-{{ collection.title | handle }}" data-toggle="tab">{{ collection.title }}</a></li>
+              {% endfor %}
+              
+            </ul>
+          </div>
+          <!-- tab-menu-end -->
+          
+        </div>
+        <!-- tab-area-start -->
+        <div class="tab-content">
+          {% for block in section.blocks %}
+          {% assign collection = collections[block.settings.collection] %}
+          
+          <div class="tab-pane {% if forloop.first == true %}active{% endif %}" id="{{ section.id }}-{{ collection.title | handle }}">
+            <div class="row">
+              <div class="{% if block.settings.single_banner_enable %}col-lg-9 col-md-9{% else %}col-lg-12 col-md-12{% endif %} col-sm-12 col-xs-12">
+                <div class="inner-box">
+                  <div class="row">
+                    {% if block.settings.tab_menu_enable %}
+                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                      <div class="left-menu">
+                        {% include 'tab-menu' %}
+                      </div>
+                    </div>
+                    {% endif %}
+                    <div class="{% if block.settings.tab_menu_enable %}col-lg-10 col-md-9{% else %}col-lg-12 col-md-12 tab-border{% endif %} col-sm-9 col-xs-12">
+                      
+                      <div class="tab-active-3 tab-active-2"> 
+                      {% assign collection = collections[block.settings.collection] %}
+                      {% for product in collection.products limit: block.settings.product_limit_handle  %}
+                        
+            			{% include 'single-product-tab-3' %}
+                        {% endfor %}
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% if block.settings.single_banner_enable %}
+              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+               {% include 'banner-image-5' %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          
+          {% endfor %}
+          
+        </div>
+        <!-- tab-area-end -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- product-cookware-area-end -->
+
+<style>
+ 
+  #product-cookware-area-{{ section.id }}.product-cookware-area-3{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   #product-cookware-area-{{ section.id }}.product-cookware-area-3{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+{% if block.settings.tab_menu_enable %} 
+  .tab-active-3 {
+    border-left: 1px solid #e5e5e5;
+ }
+{% endif %}  
+</style> 
+
+
+
+
+{% schema %}
+  {
+    "name": "Tab With Menu 2",
+    "settings": [
+	  {
+         "type": "header",
+         "content": "Section Margin"
+      },
+      {
+         "type": "text",
+         "id": "section_padding_top",
+         "label": "Section padding Top",
+         "default": "0" ,
+         "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+          "type": "text",
+          "id": "section_padding_bottom",
+          "label": "Section padding Bottom",
+          "default": "40" ,
+          "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+        "type": "header",
+        "content": "Section Title"
+      },
+	  {
+		"type": "text",
+		"id": "section_title",
+		"label": "Section Title",
+		"default": "Tennis"
+	  },
+	  {
+         "type": "header",
+         "content": "Section Header Border"
+      },
+      {
+         "type": "checkbox",
+         "id": "section_border_enable",
+         "label": "Show Border",
+         "default": false
+      }
+	],
+    "blocks": [
+	   {
+        "type" : "tab_product",
+        "name" : "tab product",
+        "settings" :[	
+          {
+            "type": "checkbox",
+            "id": "tab_menu_enable",
+            "label": "Show Tab Menu",
+            "default": true
+          },
+		  {
+          	"type": "link_list",
+          	"id": "tab_menu",
+          	"label": "Select Menu"
+	      },
+          {
+            "type" : "collection",
+            "id" : "collection",
+            "label" : "choose collection"
+          },
+          {
+             "type": "select",
+             "id": "product_limit_handle",
+             "label": "Product Limit",
+             "options":[
+                {
+                   "value":"3",
+                   "label": "3 products"
+                },
+                {
+                   "value":"4",
+                   "label": "4 products"
+                },
+                {
+                   "value":"5",
+                   "label": "5 products"
+                },
+                {
+                   "value":"6",
+                   "label": "6 products"
+                },
+                {
+                   "value":"7",
+                   "label": "7 products"
+                },
+                {
+                   "value":"8",
+                   "label": "8 products"
+                },
+                {
+                   "value":"9",
+                   "label": "9 products"
+                },
+                {
+                   "value":"10",
+                   "label": "10 products"
+                },
+                {
+                   "value":"11",
+                   "label": "11 products"
+                },
+                {
+                   "value":"12",
+                   "label": "12 products"
+                }
+
+              ],
+
+              "default": "6"
+          },
+          {
+            "type": "header",
+			"content": "Tab Banner"
+          },
+		  {
+            "type": "checkbox",
+            "id": "single_banner_enable",
+            "label": "Show Banner",
+            "default": true
+          },
+		  {
+            "type": "image_picker",
+            "id": "banner_img",
+            "label": "Image",
+            "info": "Recommended Size: 270 x 646px"
+           },
+		   {
+			"type": "url",
+			"id": "banner_img_url",
+			"label": "URL"
+		   }
+        ]
+
+      }
+    ],
+	"presets":[
+		{
+			"name": "Tab With Menu 2",
+			"category": "product"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

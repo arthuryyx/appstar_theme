@@ -1,0 +1,126 @@
+
+
+{% if section.settings.counter_enable %}
+<!-- counter-area-start -->
+<div class="counter-area">
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+      <div class="col-lg-{{ section.settings.counter_coloum }} col-md-3 col-sm-6 col-xs-12">
+        <div class="single-counter text-center">
+          <h2 class="counter">{{ block.settings.counter_number }}</h2>
+          <span>{{ block.settings.counter_title }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- counter-area-end -->
+{% endif %}
+
+<style>
+ 
+  .counter-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .counter-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  } 
+  .counter-area {
+  background: rgba(0, 0, 0, 0) url("{% if section.settings.counter_bg_img %}{{ section.settings.counter_bg_img | img_url: 'master' }}{% else %}http:\/\/via.placeholder.com\/19200x300{% endif %}") no-repeat scroll center center / cover ;
+}
+  
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "Counter Area",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "counter_enable",
+        "label": "Show Counter",
+        "default": true
+      },
+	  {
+         "type": "image_picker",
+         "id": "counter_bg_img",
+         "label": "Counter Background Image",
+         "info": "Recommended Size: 1920 x 300px"
+      },
+	  {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "50" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "select",
+        "id": "counter_coloum",
+        "label": "Counter Coloum",
+        "options":[
+          {
+            "label": "6 coloum",
+            "value": "2"
+          },
+          {
+            "label": "4 coloum",
+            "value": "3"
+          },
+          {
+            "label": "3 coloum",
+            "value": "4"
+          },
+          {
+            "label": "2 coloum",
+            "value": "6"
+          }
+        ],
+        "default": "3"
+      }
+	],
+    "blocks": [
+      {
+      "type": "counter_area",
+      "name": "Counter Area",
+      "settings": [
+          {
+            "type": "text",
+            "id": "counter_number",
+            "label": "Counter Number",
+            "default": "320",
+            "info": "320"
+          },
+          {
+            "type": "text",
+            "id": "counter_title",
+            "label": "Counter Title",
+            "default": "projects completed",
+            "info": "projects completed"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

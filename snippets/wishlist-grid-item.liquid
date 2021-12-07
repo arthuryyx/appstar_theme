@@ -1,0 +1,70 @@
+
+{% assign variant = product.selected_or_first_available_variant %}
+
+{% if product.available %}
+{% assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" %}
+{% endif %} 
+
+<div class="product-tile-container wishlist-tile-container" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
+  
+  <div class="product-tile wishlist-tile single-product">
+    
+    <div class="product-tile--tile-media">
+      <a class="tile-media--media-link" href="{{ product.url }}">
+        <div class="media-link--image">
+          <img class="image--main" src="{{ product.featured_image | product_img_url: 'large' }}" alt="{{ product.title }}">
+        </div>
+      </a>
+    </div>
+    <div class="product-tile--tile-content flex product-text">
+      <div class="tile-content--text">
+        <h3 class="post-title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+        <div class="rating">
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        </div>
+        <div class="price">
+          <ul>
+            {% if on_sale %}
+            <li><span class="new-price">{{ product.price | money }}</span></li>
+            <li><span class="old-price">{{ product.compare_at_price | money }}</span></li>
+            {% else %}
+            <li><span class="new-price">{{ product.price | money }}</span></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="product-tile--tile-actions flex">
+        <div class="link-button">
+          <ul>
+
+            {% if product.description contains '[affiliate_link]' %}
+            {% assign affiliate_link_first = product.description | split:'[/affiliate_link]' | first %}
+            {% assign affiliate_link_final = affiliate_link_first | split:'[affiliate_link]' | last %}
+            <li>
+              <a href="{{ affiliate_link_final }}"><i class="fa fa-cart-plus"></i></a>
+            </li>
+            {% else %}
+            <li>
+              <a href="javascript:void(0);" class="action-btn cart cart-item" onclick="{{ func }}; return false;" title="{{ 'products.product.add_to_cart' | t }}">
+                <i class="fa fa-cart-plus"></i>
+                <i class="fa fa-circle-o-notch fa-spin"></i>
+                <i class="fa fa-check"></i>
+                <i class="fa fa-times"></i>
+              </a>
+            </li>
+            <li>{% include 'wishlist-button' %}</li>
+            <li>
+              <a href="javascript:void(0);" class="action-btn quick-view" onclick="quiqview('{{ product.handle | handleize }}')" data-toggle="modal" data-target="#quickViewModal"><i class="fa fa-eye"></i></a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  
+</div>

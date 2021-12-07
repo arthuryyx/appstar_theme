@@ -1,0 +1,31 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+
+{% assign on_out = true %}
+{% if product.available %}
+{% assign on_out = false %}
+{% endif %}
+
+
+
+<div class="single-tab_container">
+  <div class="tab_container-img">
+    <a href="{{ product.url | within: 'collection' }}"><img src="{{ product.featured_image.src | img_url : 'large' }}" alt="product" /></a>
+  </div>
+  <div class="tab_container-text">
+    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="price">
+      <ul>  
+        {% if on_sale %}
+        <li><span class="new-price">{{ product.price | money }}</span></li>
+        <li><span class="old-price">{{ product.compare_at_price | money }}</span></li>
+        {% else %}
+        <li><span class="new-price">{{ product.price | money }}</span></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+
+<div class="single-post mb-30 item">
+  <div class="post-img">
+    <a href="{{ article.url }}"><img src="{{ article | img_url : 'master' }}" alt="post" /></a>
+  </div>
+  <div class="post-text">
+    <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+    <div class="blog-single-content">
+    {% if article.excerpt.size > 0 %}
+      {{ article.excerpt }}
+      {% else %}
+      <!-- Decs -->
+      {{ article.content | truncatewords: 30 }}
+      {% endif %}
+    </div>
+    <a href="{{ article.url }}">{{ section.settings.red_more }}</a>
+  </div>
+</div>

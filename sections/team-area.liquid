@@ -1,0 +1,161 @@
+
+{% if section.settings.team_enable %}
+
+<!-- team-area-start -->
+<div class="team-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="team-title text-center mb-50">
+          <h2>{{ section.settings.team_title }}<span>{{ section.settings.team_sub_title }}</span></h2>
+        </div>
+      </div>
+      {% for block in section.blocks %}
+      <div class="col-lg-{{ section.settings.team_coloum }} col-md-3 col-sm-6 col-xs-12">
+        <div class="single-team">
+          <div class="team-img-area">
+            {% if block.settings.member_img %}
+            <div class="team-img">
+              <a href="{{ block.settings.member_img_url }}"><img src="{{ block.settings.member_img | img_url: 'master' }}" alt="man" /></a>
+            </div>
+            {% else %}
+            <div class="team-img">
+        		<img src=" http:\/\/via.placeholder.com\/300x373" alt="team">
+            </div>
+            {% endif %}
+            <div class="team-link">
+              <ul>
+                {% include 'social-icon' %}
+              </ul>
+            </div>
+          </div>
+          <div class="team-content text-center">
+            <h3>{{ block.settings.member_name }}</h3>
+            <span>{{ block.settings.member_designation }}</span>
+          </div>
+        </div>
+      </div>
+	{% endfor %}
+      
+
+      
+    </div>
+  </div>
+</div>
+<!-- team-area-end -->
+
+{% endif %}
+
+
+<style>
+ 
+  .team-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .team-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style>
+
+
+{% schema %}
+  {
+    "name": "Team Area",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "team_enable",
+        "label": "Show Team",
+        "default": true
+      },
+	  {
+        "type": "header",
+        "content": "Section Paddings"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "50" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "team_title",
+        "label": "Team Title",
+		"default": "Our Crazy"
+      },
+      {
+        "type": "text",
+        "id": "team_sub_title",
+        "label": "Team SubTitle",
+		"default": " Team"
+      },
+      {
+        "type": "select",
+        "id": "team_coloum",
+        "label": "Team Coloum",
+        "options":[
+          {
+            "label": "6 coloum",
+            "value": "2"
+          },
+          {
+            "label": "4 coloum",
+            "value": "3"
+          },
+          {
+            "label": "3 coloum",
+            "value": "4"
+          },
+          {
+            "label": "2 coloum",
+            "value": "6"
+          }
+        ],
+        "default": "4"
+      }
+	],
+    "blocks": [
+      {
+        "type": "team_member",
+        "name": "team Member",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "member_img",
+            "label": "Member Image",
+            "info": "Recommended Size: 300 x 373px"
+          },
+          {
+            "type": "text",
+            "id": "member_name",
+            "label": "Member  Name",
+            "default": "Marcos Alonso"
+          },
+          {
+            "type": "text",
+            "id": "member_designation",
+            "label": "Member  Designation",
+            "default": "Class Master"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

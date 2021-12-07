@@ -1,0 +1,83 @@
+{% unless template == 'index' %}
+<nav class="" role="navigation" aria-label="breadcrumbs">
+  <ul class="breadcrumb-list">
+
+    <li>
+      <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
+    </li>
+    <li>
+      {% if template contains 'product' %}
+
+      {% if collection %}
+      {% if collection.handle %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      {% endif %}
+      {% endif %}
+
+      <span>{{ product.title }}</span>
+
+      {% elsif template contains 'collection' and collection.handle %}
+
+
+      {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+
+      <span>{{ current_tags | join: " + " }}</span>
+      {% else %}
+      <span>{{ collection.title }}</span>
+      {% endif %}
+
+      {% elsif template == 'blog' %}
+
+
+      {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+
+      <span>{{ current_tags | join: " + " }}</span>
+      {% else %}
+      <span>{{ blog.title }}</span>
+      {% endif %}
+
+      {% elsif template == 'article' %}
+
+
+      {{ blog.title | link_to: blog.url }}
+
+      <span>{{ article.title }}</span>
+
+      {% elsif template contains 'page' %}
+
+
+      <span>{{ page.title }}</span>
+
+      {% else %}
+
+
+      <span>{{ page_title }}</span>
+
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+{% endunless %}
+
+<style>
+  .breadcrumbs {
+    background-color: {{ settings.breadcumb_bg_color }};
+    
+    {% if settings.breadcrumb_banner_image_enable %}
+    background: {{ settings.breadcrumb_banner_bg }} {% if settings.breadcrumb_banner_image_enable %}url("{% if settings.breadcrumb_banner_image %}{{ settings.breadcrumb_banner_image | img_url: 'master' }}{% else %}http:\/\/via.placeholder.com\/1479x211{% endif %}") no-repeat scroll center center / cover{% endif %};
+    padding: {{ settings.breadcrumb_ptb }}px 0;
+    {% endif %} 
+  }
+  
+  
+  .breadcrumb-list > li > a {
+    color: {{ settings.breadcumb_text_color }};
+  }
+
+
+
+</style>

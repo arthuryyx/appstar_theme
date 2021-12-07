@@ -1,0 +1,20 @@
+{% assign discount_price_on = shop.metafields.techbundle_settings.apply_discount_on %}
+{% if item.variant.compare_at_price != blank  %}
+                {% assign discount_price_on_apply = item.variant.compare_at_price %}              
+            {% else %}
+                {% assign discount_price_on_apply = item.variant.price %}
+            {% endif %}
+            
+            {% if discount_price_on == "1" or discount_price_on == "true" %}
+                {% assign discount_price_on_apply = item.variant.price %}
+            {% endif %}
+          
+            {% assign percentage = item.properties["Bundlo Products Bundle"] | replace: '%', '' | minus: 0 %}          
+               {% assign percentage_price = discount_price_on_apply | times: percentage | divided_by: 100.0 %}          
+            {% assign discount_price = discount_price_on_apply | minus: percentage_price %}
+           
+               {% if item.variant.price < discount_price %}
+                 {% assign discount_price = item.variant.price %}
+            {% endif %}  
+ {% assign tech_bundle_line_price = discount_price| times:item.quantity %}
+{% assign Tech_Bundle_total = Tech_Bundle_total | plus: tech_bundle_line_price %}

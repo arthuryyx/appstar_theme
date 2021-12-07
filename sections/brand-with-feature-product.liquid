@@ -1,0 +1,339 @@
+
+<!-- brand-slider-area-start -->
+<div class="brand-slider-area" id="{{ section.id }}">
+  <div class="container">
+    <div class="row">
+
+      {% if section.settings.brand_product_enable %}
+      <div class="{% if section.settings.featured_product_enable %}col-lg-6 col-md-6{% else %}col-lg-12 col-md-12{% endif %} col-sm-12 col-xs-12">
+        {% include 'brand-product' %}
+      </div>
+      {% endif %}
+
+      {% if section.settings.featured_product_enable %} 
+      <div class="{% if section.settings.brand_product_enable %}col-lg-6 col-md-6{% else %}col-lg-12 col-md-12{% endif %} col-sm-12 col-xs-12">  
+        {% include 'featured-product' %}
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+<!-- brand-slider-area-end -->
+
+<style>
+ 
+  .brand-slider-area{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   .brand-slider-area{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+  
+  
+</style>
+
+<script>
+  
+  /*----------------------------
+ saleproduct-active-3
+------------------------------ */  
+  $("#{{ section.id }} .saleproduct-active-new-3").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+    items : {{ section.settings.featured_product_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.featured_product_coloum }}],
+	  itemsDesktopSmall : [992,{{ section.settings.featured_product_coloum }}],
+	  itemsTablet: [768,1],
+	  itemsMobile : [479,1],
+  });
+  
+</script>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Brand With Product",
+    "settings": [
+		{
+            "type": "header",
+            "content": "Section Margin"
+        },
+        {
+            "type": "text",
+            "id": "section_margin_top",
+            "label": "Section Margin Top",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+            "type": "text",
+            "id": "section_margin_bottom",
+            "label": "Section Margin Bottom",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+		{
+            "type": "header",
+            "content": "Brand Product"
+        },
+      	{
+            "type": "header",
+            "content": "Section Title"
+        },
+		{
+            "type": "text",
+            "id": "section_title",
+			"label": "Section Title",
+			"default": "Brand Sale"
+        },
+		{
+           "type": "header",
+           "content": "Section Header Border"
+        },
+        {
+           "type": "checkbox",
+           "id": "section_border_enable",
+           "label": "Show Border",
+           "default": true
+        },
+		{
+          "type": "checkbox",
+          "id": "brand_product_enable",
+          "label": "Show Brand Product",
+          "default": true
+        },
+		{
+            "type": "header",
+            "content": "Featured Product"
+        },
+      	{
+            "type": "header",
+            "content": "Section Title"
+        },
+		{
+            "type": "text",
+            "id": "section_title_2",
+			"label": "Section Title",
+			"default": "Featured Product Slider"
+        },
+		{
+           "type": "header",
+           "content": "Section Header Border"
+        },
+        {
+           "type": "checkbox",
+           "id": "section_border_enable_2",
+           "label": "Show Border",
+           "default": true
+        },
+		{
+          "type": "checkbox",
+          "id": "featured_product_enable",
+          "label": "Show Featured Product",
+          "default": true
+        },
+		{
+          "type": "select",
+          "id": "featured_product_coloum",
+          "label": "Featured Product Limit",
+          "options":[
+              {
+                "value":"1",
+                "label": "1 products"
+              },
+			  {
+                "value":"2",
+                "label": "2 products"
+              },
+			  {
+                "value":"3",
+                "label": "3 products"
+              },
+              {
+                "value":"4",
+                "label": "4 products"
+              },
+              {
+                "value":"5",
+                "label": "5 products"
+              },
+              {
+                 "value":"6",
+                "label": "6 products"
+              },
+              {
+                "value":"7",
+                "label": "7 products"
+              },
+              {
+                "value":"8",
+                "label": "8 products"
+              },
+              {
+                "value":"9",
+                "label": "9 products"
+              },
+              {
+                "value":"10",
+                "label": "10 products"
+              }
+            ],
+          "default": "1"
+         }
+	],
+    "blocks": [
+	   {
+        "type" : "brand_product",
+        "name" : "Brand With Product",
+        "settings" :[
+          {
+            "type": "image_picker",
+            "id": "brand_img",
+            "label": "Image",
+            "info": "Recommended Size: 400 x 400px"
+          },
+          {
+            "type" : "collection",
+            "id" : "collection",
+            "label" : "choose collection"
+          },
+		  {
+            "type": "select",
+            "id": "p_limit",
+            "label": "Product Limit",
+            "options":[
+              {
+                "value":"1",
+                "label": "1 products"
+              },
+			  {
+                "value":"2",
+                "label": "2 products"
+              },
+			  {
+                "value":"3",
+                "label": "3 products"
+              },
+              {
+                "value":"4",
+                "label": "4 products"
+              },
+              {
+                "value":"5",
+                "label": "5 products"
+              },
+              {
+                 "value":"6",
+                "label": "6 products"
+              },
+              {
+                "value":"7",
+                "label": "7 products"
+              },
+              {
+                "value":"8",
+                "label": "8 products"
+              },
+              {
+                "value":"9",
+                "label": "9 products"
+              },
+              {
+                "value":"10",
+                "label": "10 products"
+              }
+            ],
+          "default": "3"
+          }
+        ]
+
+      },
+	  {
+        "type" : "featured_product",
+        "name" : "Featured Product",
+        "settings" :[
+          {
+            "type": "image_picker",
+            "id": "featured_img",
+            "label": "Image",
+            "info": "Recommended Size: 400 x 400px"
+          },
+          {
+            "type" : "collection",
+            "id" : "collection_1",
+            "label" : "choose collection"
+          },
+		  {
+            "type": "select",
+            "id": "p_limit_2",
+            "label": "Product Limit",
+            "options":[
+              {
+                "value":"1",
+                "label": "1 products"
+              },
+			  {
+                "value":"2",
+                "label": "2 products"
+              },
+			  {
+                "value":"3",
+                "label": "3 products"
+              },
+              {
+                "value":"4",
+                "label": "4 products"
+              },
+              {
+                "value":"5",
+                "label": "5 products"
+              },
+              {
+                 "value":"6",
+                "label": "6 products"
+              },
+              {
+                "value":"7",
+                "label": "7 products"
+              },
+              {
+                "value":"8",
+                "label": "8 products"
+              },
+              {
+                "value":"9",
+                "label": "9 products"
+              },
+              {
+                "value":"10",
+                "label": "10 products"
+              }
+            ],
+          "default": "3"
+          }
+        ]
+
+      }
+    ],
+	"presets":[
+		{
+			"name": "Brand with Product",
+			"category": "product"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

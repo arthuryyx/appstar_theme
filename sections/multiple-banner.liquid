@@ -1,0 +1,115 @@
+
+
+
+<!-- banner-area-start -->
+<div class="banner-area">
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+      <div class="col-lg-{{ block.settings.multiple_banner_coloum }} col-md-{{ block.settings.multiple_banner_coloum }} col-sm-{{ block.settings.multiple_banner_coloum }} col-xs-12">
+        <div class="banner-img mb-30">
+          <a href="{{ block.settings.banner_img_url }}"><img src="{% if block.settings.banner_img %}{{ block.settings.banner_img | img_url: 'master' }}{% else %}http:\/\/via.placeholder.com\/670x180{% endif %}" alt="banner" /></a>
+        </div>
+        {% if block.settings.coundown_enable %}
+          <div class="timer" style= "position: absolute; top: 8px; right: 24px;">
+            <div data-countdown="{{ block.settings.coundown }}"></div>
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- banner-area-end -->
+
+<style>
+ 
+  .banner-area{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   .banner-area{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+  
+  
+</style> 
+
+
+
+
+{% schema %}
+  {
+    "name": "multiple-banner",
+    "settings": [
+		 {
+            "type": "header",
+            "content": "Section Margin"
+         },
+         {
+            "type": "text",
+            "id": "section_margin_top",
+            "label": "Section Margin Top",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+         },
+         {
+            "type": "text",
+            "id": "section_margin_bottom",
+            "label": "Section Margin Bottom",
+            "default": "10" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+         }
+	],		
+	"blocks":[
+      {
+         "type": "banner",
+         "name": "Banner",
+         "settings": [
+			{
+				"type": "text",
+				"id": "multiple_banner_coloum",
+				"label": "Banner",
+                "default": "6",
+                "info": "Follow Bootstrap Column"
+			},
+			{
+				"type": "image_picker",
+				"id": "banner_img",
+				"label": "Image",
+				"info": "Recommended Size: 670 x 180px"
+		    },
+			{
+				"type": "url",
+				"id": "banner_img_url",
+				"label": "URL"
+		    },
+			{
+                "type": "checkbox",
+                "id": "coundown_enable",
+                "label": "Show Coundown",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "coundown",
+                "label": "Coundown",
+                "default": "2019/12/16",
+                "info": "yyyy/mm/dd"
+            }
+        ]
+       }
+    ],
+	"presets":[
+		{
+			"name": "multiple-banner",
+			"category": "banner"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,96 @@
+
+{% if section.settings.bestsellerproduct_area_total_enable  %}
+{% if section.settings.bestsellerproduct_area_enable  %}
+<!-- bestsellerproduct-area-start -->
+<div class="bestsellerproduct-area mb-40 ">
+
+  <div class="section-title">
+    <h2>{{ section.settings.best_seller_title }}</h2>
+  </div>
+
+  <div class="bestsellerproduct-active">
+
+
+    <div class="single-bestseller">
+
+      {% assign collection = collections[section.settings.collection_2] %}
+      {% for product in collection.products limit: section.settings.bestselling_limit %}              
+      <!-- single-product-start -->
+      <div class="single-product {% unless forloop.last %}border-bottom{% endunless %}">
+        <div class="product-img">
+          <a href="{{ product.url | within: 'collection' }}"><img src="{{ product.featured_image.src | img_url : '280x' }}" alt="product-img" /></a>
+        </div>
+        <div class="product-text">
+          <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+          <div class="rating">
+            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          </div>
+          <div class="price">
+            <ul>
+              {% if on_sale %}
+              <li><span class="new-price">{{ product.price | money }}</span></li>
+              <li><span class="old-price">{{ product.compare_at_price | money }}</span></li>
+              {% else %}
+              <li><span class="new-price">{{ product.price | money }}</span></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- single-product-end -->
+
+      {% endfor %}
+
+    </div>     
+
+
+  </div>
+</div>
+<!-- bestsellerproduct-area-start -->
+{% endif %}
+
+
+
+{% if section.settings.testimonial_area_enable  %}
+<!-- testimonial-area-start -->
+<div class="testimonial-area mb-40">
+  <div class="testimonial-active">
+
+    {% for block in section.blocks %}
+    {% case  block.type %}
+    {% when 'testimonial' %}
+    <div class="single-testimonial text-center">
+      <div class="testimonial-img">
+        {% if  block.settings.auther_image %}
+        <a href="{{ block.settings.auther_image_url }}"><img src="{{ block.settings.auther_image | img_url : 'small' }}" alt="man" /></a>
+        {% else %}
+        <img src="http:\/\/via.placeholder.com\/107x107" alt="slider">
+        {% endif %}
+      </div>
+      <div class="testimonial-text">
+        <p>{{ block.settings.auther_comments }}</p>
+        <h3>{{ block.settings.author_name }}</h3>
+        <span class="job">{{ block.settings.author_designation }}</span>
+        <span class="email">{{ block.settings.author_email }}</span>
+      </div>
+    </div>
+	{% endcase %}
+    {% endfor %}
+  </div>
+</div>
+<!-- testimonial-area-end -->
+{% endif %}
+
+
+{% if section.settings.banner_3_area_enable  %}
+<!-- baner-area-start -->
+<div class="baner-area mb-40">
+  <div class="banner-img">
+    <a href="{{ section.settings.banner_img_3_url }}"><img src="{% if section.settings.banner_img_3 %}{{ section.settings.banner_img_3 | img_url: 'master' }}{% else %}http:\/\/via.placeholder.com\/ 270x324{% endif %}" alt="banner" /></a>
+  </div>
+</div>
+<!-- baner-area-end -->
+{% endif %}
+
+
+{% endif %}

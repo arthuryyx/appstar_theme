@@ -1,0 +1,123 @@
+
+{% if section.settings.mission_enable %}
+<!-- our-mission-area-start -->
+<div class="our-mission-area">
+  <div class="container">
+    <div class="row">
+      {% for block in section.blocks %}
+      <div class="col-lg-{{ section.settings.mission_coloum }} col-md-4 col-sm-6 col-xs-12">
+        <div class="single-misson">
+          <h3>{{ block.settings.mission_title }}<span>{{ block.settings.mission_sub_title }}</span></h3>
+          <p>{{ block.settings.mission_description }}</p>
+        </div>
+      </div>
+	  {% endfor %}
+      
+    </div>
+  </div>
+</div>
+<!-- our-mission-area-end -->
+{% endif %}
+
+
+<style>
+ 
+  .our-mission-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .our-mission-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style>
+
+{% schema %}
+  {
+    "name": "Our Mission",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "mission_enable",
+        "label": "Show Team",
+        "default": true
+      },
+	  {
+         "type": "header",
+         "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "50" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "select",
+        "id": "mission_coloum",
+        "label": "mission Coloum",
+        "options":[
+          {
+            "label": "6 coloum",
+            "value": "2"
+          },
+          {
+            "label": "4 coloum",
+            "value": "3"
+          },
+          {
+            "label": "3 coloum",
+            "value": "4"
+          },
+          {
+            "label": "2 coloum",
+            "value": "6"
+          }
+        ],
+        "default": "4"
+      }
+ 
+	],
+    "blocks": [
+      {
+        "type": "our_mission",
+        "name": "our mission",
+        "settings": [
+          {
+            "type": "text",
+            "id": "mission_title",
+            "label": "Team Title",
+            "default": "Why"
+          },
+          {
+            "type": "text",
+            "id": "mission_sub_title",
+            "label": "Team SubTitle",
+            "default": "We do?"
+          },
+          {
+            "type": "textarea",
+            "id": "mission_description",
+            "label": "Mission Description",
+            "default": "Huis nostrud exerci tation ullamcorper suscipites lobortis nisl ut aliquip ex ea commodo consequat. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius claritas."
+          }
+        ]
+      }
+    ]
+
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

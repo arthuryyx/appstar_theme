@@ -1,0 +1,488 @@
+.header-link ul li a:hover{
+	color: #ff7f00;
+}
+.dollar-submenu ul li > a:hover{
+	color:#ff7f00;
+}
+.shopping-area ul li a:hover{
+	color:#ff7f00
+}
+.shopping-area ul li .shopping-cart ul li .cart-list .cart-info h4 a:hover,.shopping-area ul li .shopping-cart ul li .cart-list .cart-info .cart-price span.price,.shopping-area ul li .shopping-cart ul li .cart-list .pro-del a:hover{
+	color:#ff7f00;
+}
+.shopping-cart .mini-cart-total span.total-price {
+  color:#ff7f00;
+}
+.shopping-cart .cart-button a,.home-2 .shopping-cart .cart-button a,.home-3 .shopping-cart .cart-button a,.home-4 .shopping-cart .cart-button a{
+	color:#ff7f00;
+}
+.shopping-cart .cart-button a.right:hover{
+	background:#fff;
+	color:#ff7f00;
+}
+.Category-area h3 {
+  background: #ff7f00 none repeat scroll 0 0;
+  }
+  .category-menu ul li:hover > a{
+	background-color: #ff7f00;
+}
+.category-menu ul li > ul.category-submenu li > ul li a:hover {
+    color: #ff7f00;
+}
+.main-menu-area ul li:hover a,.main-menu-area ul li.active a{
+	color:#ff7f00;
+}
+.main-menu-area ul li .sub-menu ul li a:hover{
+	color:#ff7f00;
+}
+.single-slider .slider-text a{
+	background: #ff7f00 none repeat scroll 0 0;
+	border: 1px solid #ff7f00;
+}
+.timer:before{
+	color: #ff7f00;
+	}
+.single-product .product-text h3 a:hover{
+	color:#ff7f00;
+}
+.single-product .product-text .price ul li span.new-price{
+	color:#ff7f00;
+}
+.single-product .product-text .link-button ul li a:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+	border-color: #ff7f00;
+}
+.saleproduct-active.owl-theme .owl-controls .owl-buttons div:hover,.saleproduct-active-2.owl-theme .owl-controls .owl-buttons div:hover,.saleproduct-active-3.owl-theme .owl-controls .owl-buttons div:hover,.tab-active.owl-theme .owl-controls .owl-buttons div:hover,.bestsellerproduct-active.owl-theme .owl-controls .owl-buttons div:hover,.post-active.owl-theme .owl-controls .owl-buttons div:hover,.tab_container-active.owl-theme .owl-controls .owl-buttons div:hover{
+	background:#ff7f00;
+	border:1px solid #ff7f00;
+}
+.tab-menu ul li a:hover,.tab-menu ul li.active a{
+	color:#ff7f00;
+}
+.single-tab .tab-text h3 a:hover{
+	color:#ff7f00;
+}
+.single-tab .tab-text .tab-price ul li span.new-price{
+	color:#ff7f00;
+}
+.single-shop .shop-text ul li a:hover{
+	color: #ff7f00;
+}
+.single-shop .shop-text ul li a:hover:before{
+	background: #ff7f00 none repeat scroll 0 0;
+}
+.single-product > span {
+  background:#ff7f00 ;
+}
+.newsletter-area{
+	background-color:#ff7f00 ;
+}
+.single-banner-2 .banner-2-img a{
+	color: #ff7f00;
+}
+.single-banner-2 .banner-text-2 h2{
+	color: #ff7f00;
+}
+.footer-test ul li a:hover{
+	color:#ff7f00;
+}
+.footer-menu ul li a:hover{
+	color: #ff7f00;
+}
+.footer-tag ul li a:hover{
+	color:#ff7f00;
+}
+a#scrollUp:hover {
+	background: #ff7f00 none repeat scroll 0 0;
+	border-color: #ff7f00;
+}
+.home-2 .main-menu-area ul li.active > a,.home-2 .main-menu-area ul li:hover > a{
+	color:#ff7f00;
+}
+.home-2 .shopping-area ul li.number span {
+  color: #ff7f00;
+}
+.home-2 .shopping-area ul li.number > i {
+  color: #ff7f00;
+}
+.home-2 .shopping-area ul li.number > a{
+	color:#ff7f00;
+}
+.home-2 .section-title h2:before{
+	background: #ff7f00 none repeat scroll 0 0;
+}
+.home-2 .section-title-2 h2:before{
+	background: #ff7f00 none repeat scroll 0 0;
+}
+ .home-2 .tab-menu ul li a:before{
+	background: #ff7f00 none repeat scroll 0 0;
+}
+.left-menu a:hover{
+	color:#ff7f00;
+}
+.post-text h3 a:hover{
+	color:#ff7f00;
+}
+.post-text a:hover{
+	color:#ff7f00;
+}
+.tab_container-text h3 a:hover{
+	color: #ff7f00;
+}
+.tab_container-text .price ul li span.new-price{
+	color:#ff7f00;
+}
+.home-3  .header-link ul li a:hover{
+	color:#ff7f00;
+}
+.home-3 .main-menu-area ul li .sub-menu ul li a:hover {
+  color: #ff7f00;
+}
+.home-3 .shopping-area ul li.number > span {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.home-3 .Category-area h3 {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.home-3 .category-menu ul li:hover > a {
+  color: #ff7f00;
+}
+.home-3 .category-menu ul li .category-submenu span a:hover {
+  color: #ff7f00;
+}
+.home-3 .left-menu a:hover,.home-3 .tab-menu ul li a:hover, .home-3 .tab-menu ul li.active a,.home-3 .single-product .product-text h3 a:hover,.home-3 .tab_container-text h3 a:hover,.home-3 .post-text h3 a:hover,.home-3 .post-text a:hover,.home-3 .footer-test ul li a:hover  {
+  color: #ff7f00;
+} 
+.tab-active-2.owl-theme .owl-controls .owl-buttons div:hover{
+	background-color:#ff7f00;
+	border:1px solid #ff7f00;
+}
+.home-3 .single-product .product-text .link-button ul li a:hover,.home-3 .tab_container-active.owl-theme .owl-controls .owl-buttons div:hover,.home-3 .saleproduct-active-3.owl-theme .owl-controls .owl-buttons div:hover {
+  background: #ff7f00 none repeat scroll 0 0;
+  border-color: #ff7f00;
+}
+.home-4 .header-link ul li a:hover,.home-4 .shopping-area ul li a:hover {
+  color: #ff7f00;
+}
+.home-4 .main-menu-area ul li .sub-menu ul li a:hover {
+  color: #ff7f00;
+}
+.home-4 .shopping-area ul li.number > span {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.home-4 .header-bottom-area {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.home-4 .category-menu ul li:hover > a {
+  background-color: #ff7f00;
+}
+.home-4 .category-menu ul li .category-submenu span a:hover {
+  color: #ff7f00;
+}
+.home-4 .single-slider .slider-text a:hover {
+  background: #ff7f00 none repeat scroll 0 0;
+  border: 1px solid #ff7f00;
+}
+.new-product .section-title h2:before{
+	background: #ff7f00 none repeat scroll 0 0;
+}
+.home-4 .single-product .product-text h3 a:hover {
+  color: #ff7f00;
+}
+.home-4 .single-product .product-text .link-button ul li a:hover {
+  background: #ff7f00 none repeat scroll 0 0;
+  border-color: #ff7f00;
+}
+.home-4 .saleproduct-active.owl-theme .owl-controls .owl-buttons div:hover,.home-4 .tab-active.owl-theme .owl-controls .owl-buttons div:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+    border-color: #ff7f00;
+}
+.home-4 .newsletter-area {
+  background-color: #ff7f00;
+}
+.home-4 .single-banner-2 .banner-2-img a ,.home-4 .single-banner-2 .banner-text-2 h2,.home-4 .footer-menu ul li a:hover,.home-4 .footer-tag ul li a:hover,.left-menu-2 ul li a:hover,.home-4 .single-tab .tab-text h3 a:hover{
+  color: #ff7f00;
+}
+.home-4 .single-product > span {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.home-4 .tab-active-2.owl-theme .owl-controls .owl-buttons div:hover {
+  background-color: #ff7f00;
+  border: 1px solid #ff7f00;
+}
+.saleproduct-active-4.owl-theme .owl-controls .owl-buttons div:hover{
+	background-color: #ff7f00;
+	border: 1px solid #ff7f00;
+}
+.breadcrumbs-menu ul li a.active{
+	color:#ff7f00;
+}
+.panel-title a {
+  color: #ff7f00;
+}
+.panel-body ul li a:hover{
+	color:#ff7f00;
+}
+.panel-body ul.color li a:hover{
+  border: 1px solid #ff7f00;
+}
+.tab-menu-2 ul li.active a{
+	color:#ff7f00;
+}
+.single-product-2 .link-button ul li a:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+	border-color: #ff7f00;
+}
+.product-text-2 h3 a:hover{
+	color:#ff7f00;
+}
+.product-text-2 .price ul li span.new-price{
+	color:#ff7f00;
+}
+.product-text-2 > a:hover{
+	color:#ff7f00;
+}
+.product-info-area .section-title-3 h2::before {
+  background-color: #ff7f00;
+}
+.product-info-area .nav > li.active > a {
+	background-color:#ff7f00;
+}
+.product-info-main .page-title h1:hover{
+	color:#ff7f00;
+}
+.product-info-price .price-final > span.new{
+	color:#ff7f00;
+}
+.product-add-form form a {
+  background: #ff7f00 none repeat scroll 0 0;
+  border: 1px solid #ff7f00;
+  }
+.product-social-links .product-addto-links a:hover{
+	background-color:#ff7f00;
+	border: 1px solid #ff7f00;
+}
+.blog-side-menu ul li a:hover,.catagory-menu ul li a:hover{
+	color:#ff7f00;
+}
+.blog-tag ul li a:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+	border: 1px solid #ff7f00;
+}
+.author-destils .author-right ul li a:hover{
+	color:#ff7f00;
+}
+.single-blog-content .single-blog-title h3 a:hover{
+	color:#ff7f00;
+}
+.single-blog-content .blog-single-content blockquote {
+  border-color: #ff7f00;
+}
+.sharing-post .share-icon ul li a:hover{
+	color:#ff7f00;
+}
+.comment-title-wrap:before{
+	background: #ff7f00 none repeat scroll 0 0;
+}
+.comment-reply-wrap ul li .public-comment .public-text .single-comm-top p a:hover{
+	color:#ff7f00;
+}
+.single-post-button button:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+	border: 1px solid #ff7f00;
+}
+.blog-comment-readmore .blog-readmore a:hover{
+	color:#ff7f00;
+}
+.login-form .single-login a:hover{
+	background:#ff7f00;
+	border: 1px solid #ff7f00;
+}
+.login-form > a{
+	color: #ff7f00;
+}
+.single-register-3 label a {
+  color: #ff7f00;
+}
+.single-register > a:hover{
+	background-color:#ff7f00;
+	border:1px solid #ff7f00;
+}
+.contact-info ul li a:hover{
+	color:#ff7f00;
+}
+.contact-form .single-form-3  input[type="submit"]:hover {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.about-content ul li a:hover{
+	color:#ff7f00;
+}
+.team-link ul li a:hover{
+	color:#ff7f00
+}
+.skill-content a:hover{
+	color:#ff7f00;
+	border-bottom: 1px solid #ff7f00;
+}
+.table-content table td.product-name a:hover{
+	color:#ff7f00;
+}
+.table-content table td.product-remove i:hover{
+	color:#ff7f00;
+}
+.buttons-cart ul li a:hover,.coupon form a:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+}
+.wc-proceed-to-checkout a {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.wishlist-table table .product-remove > a:hover {
+  color:#ff7f00;
+}
+.product-name a:hover{
+	color:#ff7f00;
+}
+.wishlist-table table .product-add-to-cart > a:hover {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.wishlist-share ul li a:hover {
+	color:#ff7f00;
+}
+.coupon-accordion span:hover, p.lost-password a:hover {
+  color: #ff7f00;
+}
+.coupon-info p.form-row input[type="submit"]:hover, p.checkout-coupon input[type="submit"]:hover {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.coupon-accordion span:hover, p.lost-password a:hover {
+  color: #ff7f00;
+}
+.page .entry-content a:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+	border-color: #ff7f00;
+}
+.tab-menu ul li.change-view--active a{
+	color:#ff7f00;
+}
+.pagination ul li.active a {
+  background-color: #ff7f00;
+  border-color: #ff7f00;
+}
+.single-product-2 > span {
+    background: #ff7f00;
+}
+.product-categories-tag li a:hover {
+    background: #ff7f00 none repeat scroll 0 0;
+    border-color: #ff7f00;
+}
+.panel-body ul.color li a:hover {
+    border: 2px solid #ff7f00;
+}
+.shopping-area ul li:hover a {
+  color: #ff7f00;
+}
+.product-add-form button,.product-add-form a {
+    background: #ff7f00 none repeat scroll 0 0;
+    border: 1px solid #ff7f00;
+}
+.swatch-element input:checked + label {
+    color: #ff7f00!important;
+}
+.product-info-main .product-addto-links a {
+    background: transparent;
+    border: 1px solid #ff7f00;
+  	color:#ff7f00;
+  	margin-left:14px;
+}
+.btn-primary {
+    background-color: #ff7f00;
+    border-color: #ff7f00;
+}
+.btn-primary:hover {
+    background-color: #ff7f00;
+    border-color: #ff7f00;
+}
+ul.blog_links li a:hover{
+	color: #ff7f00;
+}
+.single-blog-content .single-blog-title h3:hover{
+    color: #ff7f00;
+}
+.timer::before {
+  color: #ff7f00;
+}
+.login-toggle-btn button:hover{
+	background: #ff7f00 none repeat scroll 0 0;
+  border: 1px solid #ff7f00;
+}
+.login-toggle-btn a:hover,.create-account-btn a:hover{
+	color:#ff7f00;
+}
+.buttons-cart ul li  button:hover {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.section-header__right a.section-button {
+    background-color: #ff7f00;
+}
+
+.section-button {
+    background-color: #ff7f00;
+}
+h1.product_title:hover{
+	color:#ff7f00;
+}
+.close:hover {
+    color: #ff7f00;
+}
+.price-box__new.amount2.new-price{
+    color: #ff7f00;
+}
+.section-title.mr-bttom a:hover{
+	color:#ff7f00;
+}
+.spr-form-review-rating a, .spr-form-review-rating a:hover {
+    color: #ff7f00;
+}
+.product-info-price .product-info-stock-sku .product-attribute span.value {
+    color: #ff7f00;
+}
+.home-2 .category-menu ul li:hover > a {
+    color: #ff7f00;
+}
+.section-tittle-border h2::before {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.section-title-2 h2::before {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.tab-menu-color ul li a::before {
+  background: #ff7f00 none repeat scroll 0 0;
+}
+.tab-active-2.owl-theme .owl-controls .owl-buttons div:hover {
+    background-color: #ff7f00;
+    border: 1px solid #ff7f00;
+}
+span.main.new-price {
+  color: #ff7f00;
+}
+.single-tab .tab-text > a:hover {
+    background: #ff7f00 none repeat scroll 0 0;
+    border-color: #ff7f00;
+}
+.category-menu ul li > ul.category-submenu li a.title:before {
+    background-color: #ff7f00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

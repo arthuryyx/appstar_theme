@@ -1,0 +1,140 @@
+{% if section.settings.about_enable %}
+<!-- about-main-area-start -->
+<div class="about-main-area">
+  <div class="container">
+    <div class="row">
+      {% if section.settings.about_img_enable %}
+      <div class="{% if section.settings.about_info_enable %}col-lg-7 col-md-7  col-sm-6{% else %}col-lg-12 col-md-12  col-sm-12{% endif %} col-xs-12">
+        <div class="about-img">
+          <a href="{{ section.settings.about_img_url }}"><img src="{% if section.settings.about_img %}{{ section.settings.about_img | img_url: 'large' }}{% else %}http:\/\/via.placeholder.com\/1920x1275{% endif %}" alt="man" /></a>
+        </div>
+      </div>
+      {% endif %}
+      {% if section.settings.about_info_enable %}
+      <div class="{% if section.settings.about_img_enable %}col-lg-5 col-md-5 col-sm-6{% else %}col-lg-12 col-md-12 col-sm-12{% endif %} col-sm-6 col-xs-12">
+        <div class="about-content">
+          <h3>{{ section.settings.about_title }} <span>{{ section.settings.highlight_title }}</span></h3>
+          <p>{{ section.settings.about_description }}</p>
+          <ul>
+            
+            {% assign about_menu_handle = section.settings.about_menu_handle %}
+            {% for link in linklists[about_menu_handle].links %}
+            <li><a href="{{ link.url }}"><i class="fa fa-{{ section.settings.menu_icon }}"></i>{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<!-- about-main-area-end -->
+{% endif %}
+
+<style>
+ 
+  .about-main-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .about-main-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "About Information",
+    "settings": [
+	  {
+        "type": "checkbox",
+        "id": "about_enable",
+        "label": "Show About Information",
+        "default": true
+      },
+	  {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "0" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+        "type": "checkbox",
+        "id": "about_img_enable",
+        "label": "Show About Image",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "about_img",
+        "label": "About Image",
+		"info": "Image Size 1920 X 1275"
+      },
+      {
+        "type": "url",
+        "id": "about_img_url",
+        "label": "URL"
+      },
+      {
+        "type": "checkbox",
+        "id": "about_info_enable",
+        "label": "Show About Description",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "about_title",
+        "label": "About Title",
+  		"default": "Why"
+      },
+      {
+        "type": "text",
+        "id": "highlight_title",
+        "label": "About Highlight Title",
+  		"default": "We are?"
+      },
+      {
+        "type": "textarea",
+        "id": "about_description",
+        "label": "About Description",
+  		"default": "Mellentesque faucibus dapibus dapibus. Morbi aliquam aliquet neque. Donec placerat dapibus sollicitudin. Morbi arcu nisi, mattis ut ullamcorper in, dapibus ac nunc. Cras bibendum mauris et sapien feugiat. scelerisque accumsan nibh gravida. Quisque aliquet justo elementum lectus ultrices bibendum."
+      },
+	  {
+		"type": "header",
+        "content": "About Info Menu"
+	  },
+      {
+        "type": "link_list",
+        "id": "about_menu_handle",
+        "label": "Select Menu"
+      },
+	  {
+		"type": "text",
+		"id": "menu_icon",
+		"label": "About Menu Icon",
+		"default": "check"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,245 @@
+
+{% if section.settings.product_description_tab_enable %}
+
+
+<!-- product-info-area-start -->
+<div class="product-info-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          {% if section.settings.product_info_enable %}
+
+          <li class="active"><a href="#Details" data-toggle="tab">{{ section.settings.more_info_title }}</a></li>
+      
+          {% endif %}
+          {% if section.settings.review_enable %}{% endif %}
+          <li><a href="#Reviews" data-toggle="tab">{{ section.settings.review_title }}</a></li>
+          
+          {% if section.settings.tab_comment_enable %}
+          <li><a href="#comment_tab" data-toggle="tab">{{ section.settings.comment_title }}</a></li>
+          {% endif %}
+          {% if section.settings.custom_tab_1_enable %}
+          <li><a href="#custom_tab-1" data-toggle="tab">{{ section.settings.custom_tab_1_title }}</a></li>
+          {% endif %}
+          {% if section.settings.custom_tab_2_enable %}
+          <li><a href="#custom_tab-2" data-toggle="tab">{{ section.settings.custom_tab_2_title }}</a></li>
+          {% endif %}
+        </ul>
+        <div class="tab-content">
+          {% if section.settings.product_info_enable %}
+          <div class="tab-pane active" id="Details">
+            <div class="valu">
+
+
+          {% assign product_description_first = product.description | split: '[/product_description]' | first  %}
+          {% assign product_description_final = product_description_first | split: '[product_description]' | last  %}
+          {{ product_description_final }}
+
+
+            </div>
+          </div>
+          {% endif %}
+          {% if section.settings.review_enable %}
+          <div class="tab-pane" id="Reviews">
+            <div class="valu valu-2">
+     			<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+ 
+            </div>
+          </div>
+          {% endif %}
+          {% if section.settings.tab_comment_enable %}
+          <div class="tab-pane" id="comment_tab">
+             <div class="comment-box">
+              {% if section.settings.product_page_comments_box =='disqus_comment' %}
+              {% include 'disqus-comment' %}
+              {% endif %}
+              <!-- disqus comment box end -->                
+              <!-- facebook comment box start -->
+              {% if section.settings.product_page_comments_box == 'facebook_comment' %}
+              {% include 'facebook-comment' %}
+              {% endif %}
+              <!-- facebook comment box end -->
+            </div>
+          </div>
+          {% endif %}
+          {% if section.settings.custom_tab_1_enable %}
+          <div class="tab-pane" id="custom_tab-1">
+            <div class="valu-4">
+           {{ pages[section.settings.custom_tab_handle_1].content }}
+            </div>
+          </div>
+          {% endif %}
+          {% if section.settings.custom_tab_2_enable %}
+          <div class="tab-pane" id="custom_tab-2">
+            <div class="valu-5">
+             {{ pages[section.settings.custom_tab_handle_2].content }}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- product-info-area-end -->
+
+{% endif %}
+
+
+<style>
+ 
+  .product-info-area{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   .product-info-area{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+  
+  
+</style> 
+
+
+{% schema %}
+  {
+    "name": "Product Tab",
+    "settings": [
+          {
+             "type": "header",
+             "content": "Section Margin"
+          },
+          {
+            "type": "text",
+            "id": "section_margin_top",
+            "label": "Section Margin Top",
+            "default": "80" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+          },
+          {
+            "type": "text",
+            "id": "section_margin_bottom",
+            "label": "Section Margin Bottom",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+          },
+		  {
+            "type": "checkbox",
+            "id": "product_description_tab_enable",
+            "label": "Show Tab",
+            "default": true
+          },
+		  {
+            "type": "checkbox",
+            "id": "product_info_enable",
+            "label": "Show Description",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "more_info_title",
+            "label": "Show Description Title",
+            "default": "Details"
+          },  
+          {
+            "type": "text",
+            "id": "review_title",
+            "label": "Show Review Title",
+            "default": "Reviews" 
+          },
+          {
+            "type": "checkbox",
+            "id": "review_enable",
+            "label": "Show Review",
+            "default": true
+          },
+          {
+            "type": "text",
+            "id": "comment_title",
+            "label": "Show Comment Title",
+            "default": "Comment" 
+          },
+          {
+            "type": "checkbox",
+            "id": "tab_comment_enable",
+            "label": "Show Comment Box",
+            "default": true
+          },
+          {
+                  "type": "radio",
+                  "id": "product_page_comments_box",
+                  "label": "Select comments box",
+                  "options": [
+                    {
+                      "value": "disqus_comment",
+                      "label": "Disqus comments"
+                    },
+                    {
+                      "value": "facebook_comment",
+                      "label": "Facebook comments"
+                    }
+                  ],
+                  "default": "disqus_comment"
+             },
+          	 {
+                  "type": "text",
+                  "id": "facebook_comments_post_limit",
+                  "label": "FacebooK Comment Limit",
+                  "default": "10"
+              },
+              {
+                  "type": "text",
+                  "id": "disqus_shortname",
+                  "label": "Your Store Name",
+                  "default": "demo-store",
+                  "info": "Disqus Shortname (Get your shortname)[disqus.com](http:\/\/disqus.com)"
+              },
+              {
+                  "type": "header",
+                  "content": "Custom Tab"
+              },
+              {
+                  "type": "checkbox",
+                  "id": "custom_tab_1_enable",
+                  "label": "Show Custom Tab",
+                  "default": true
+              },
+              {
+                  "type": "text",
+                  "id": "custom_tab_1_title",
+                  "label": "Custom Tab Title",
+                  "default": "Custom Tab"
+              },
+              {
+                  "type": "page",
+                  "id": "custom_tab_handle_1",
+                  "label": "Select Page for information",
+                  "info": "[Create a page](\/admin\/pages\/new)"
+              },
+              {
+                  "type": "checkbox",
+                  "id": "custom_tab_2_enable",
+                  "label": "Show Custom Tab",
+                  "default": true
+              },
+              {
+                  "type": "text",
+                  "id": "custom_tab_2_title",
+                  "label": "Custom Tab Title",
+                  "default": "Custom Tab"
+              },
+              {
+                  "type": "page",
+                  "id": "custom_tab_handle_2",
+                  "label": "Select Page for information",
+                  "info": "[Create a page](\/admin\/pages\/new)"
+              }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

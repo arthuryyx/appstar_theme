@@ -1,0 +1,182 @@
+{% if section.settings.brand_area_enable %}
+<!-- brand-area-start -->
+<div class="brand-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="brand-active brand-active-new">
+          {% for block in section.blocks %}
+          <!-- single-brand -->
+          <div class="single-brand">
+            <a href="{{ block.settings.brand_link }}"><img src="{% if block.settings.brand_logo %}{{ block.settings.brand_logo | img_url: 'compact' }}{% else %}https://via.placeholder.com/170x94{% endif %}" alt="brand" /></a>
+          </div>
+          <!-- single-brand -->
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- brand-area-end -->
+
+{% endif %}
+
+
+<style>
+ 
+  .brand-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .brand-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style>
+
+
+
+
+<script>
+
+                     
+/*----------------------------
+ brand-active
+------------------------------ */  
+  $(".brand-active-new").owlCarousel({
+      autoPlay: true, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:false,	  
+    items : {{ section.settings.brand_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,5],
+	  itemsDesktopSmall : [992,4],
+	  itemsTablet: [768,3],
+	  itemsMobile : [479,2],
+  });
+    
+      
+
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "Brand",
+    "settings": [
+		{
+            "type": "header",
+            "content": "Section Padding"
+        },
+        {
+            "type": "text",
+            "id": "section_padding_top",
+            "label": "Section Padding Top",
+            "default": "50" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+            "type": "text",
+            "id": "section_padding_bottom",
+            "label": "Section Padding Bottom",
+            "default": "50" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },	
+		{
+          "type": "checkbox",
+          "id": "brand_area_enable",
+          "label": "Show Brand area",
+          "default": true
+        },
+		{
+			"type": "select",
+			"id": "brand_coloum",
+			"label": "Brand Coloum",
+			"options": [
+               {
+                  "value":"3",
+                  "label": "3 brand"
+              },
+              {
+                  "value":"4",
+                  "label": "4 brand"
+              },
+              {
+                  "value":"5",
+                  "label": "5 brand"
+              },
+              {
+                  "value":"6",
+                  "label": "6 brand"
+              },
+              {
+                  "value":"7",
+                  "label": "7 brand"
+              },
+              {
+                  "value":"8",
+                  "label": "8 brand"
+              },
+              {
+                  "value":"9",
+                  "label": "9 brand"
+              },
+              {
+                  "value":"10",
+                  "label": "10 brand"
+              },
+              {
+                  "value":"11",
+                  "label": "11 brand"
+              },
+              {
+                  "value":"12",
+                  "label": "12 brand"
+              },
+              {
+                  "value":"13",
+                  "label": "13 brand"
+              },
+              {
+                  "value":"14",
+                  "label": "14 brand"
+              },
+              {
+                  "value":"15",
+                  "label": "15 brand"
+              }
+			],
+			"default": "5"
+		}
+	],
+	"blocks":[
+		{
+			"type": "brand_logo",
+			"name": "Brand Logo",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "brand_logo",
+					"label": "Image",
+					"info": "Recommended Size: 160 x 65px"
+				},
+				{
+					"type": "url",
+					"id": "brand_link",
+					"label": "Brand Link"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

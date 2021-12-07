@@ -1,0 +1,28 @@
+<div class="footer-mid">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="footer-tag text-center">
+          <ul>
+            
+            <li>
+              {% assign footer_mid_menu_handle = section.settings.footer_mid_menu %}
+              {% for link in linklists[footer_mid_menu_handle].links %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              {% unless forloop.last %}|{% endunless %}
+              {% endfor %}
+            </li>
+            
+          </ul>
+        </div>
+        {% if section.settings.payment_enable %}
+        {% if section.settings.payment_image %}
+        <div class="payment-area text-center mb-25">
+          <a href="#"><img src="{{ section.settings.payment_image | img_url: 'large' }}" alt="payment" /></a>
+        </div>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

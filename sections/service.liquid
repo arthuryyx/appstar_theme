@@ -1,0 +1,142 @@
+
+<!-- banner-area-start -->
+<div class="banner-area-service">
+  <div class="container">
+    <div class="row">
+      <div class="bg-color bg-color-border">
+        {% for block in section.blocks %}
+        <div class="col-lg-{{ section.settings.service_coloum }} col-md-4 col-sm-6 col-xs-12">
+          <div class="single-banner {% unless forloop.last %}box2{% endunless %}">
+            <div class="banner-icon">
+              <a href="{{ block.settings.sevice_icon_url }}"><i class="zmdi zmdi-{{ block.settings.sevice_icon }} zmdi-hc-fw"></i></a>
+            </div>
+            <div class="banner-text">
+              <h2>{{ block.settings.service_title }}</h2>
+              <p>{{ block.settings.service_description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- banner-area-end -->
+
+<style>
+ 
+  .banner-area-service{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .banner-area-service{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  .single-banner .banner-icon a {
+    color: {{ section.settings.service_icon_color }};
+   }
+  .bg-color {
+    background-color: {{ section.settings.service_banner_bg_color }};
+  }
+  {% if section.settings.service_border_enable %}
+  .bg-color-border {
+    border: 1px solid #eaeaea;
+  {% endif %}
+</style> 
+
+
+
+
+{% schema %}
+  {
+    "name": "service",
+    "settings": [
+     {
+      	"type": "header",
+      	"content": "Section Padding"
+     },
+     {
+      	"type": "text",
+      	"id": "section_padding_top",
+      	"label": "Section Padding Top",
+      	"default": "20" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+     },
+     {
+      	"type": "text",
+      	"id": "section_padding_bottom",
+      	"label": "Section Padding Bottom",
+      	"default": "20" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+     },	
+	 {
+		"type": "text",
+		"id": "service_coloum",
+		"label": "Banner",
+        "default": "4",
+        "info": "Follow Bootstrap Column"
+	 },
+	 {
+         "type": "color",
+         "id": "service_banner_bg_color",
+         "label": "Service Background Color",
+         "default": "#eeeeee"
+     },
+	 {
+         "type": "checkbox",
+         "id": "service_border_enable",
+         "label": "Service Background Border",
+         "default": false
+     },
+	 {
+         "type": "color",
+         "id": "service_icon_color",
+         "label": "Service Icon Color",
+         "default": "#666666"
+     }
+	],
+	"blocks":[
+      {
+         "type": "service",
+         "name": "service",
+         "settings": [
+		  {
+			"type": "text",
+			"id": "sevice_icon",
+			"label": "Service Icon",
+			"default": "refresh-sync"
+		  },
+		  {
+			"type": "url",
+			"id": "sevice_icon_url",
+			"label": "URL"
+		  },
+          {
+              "type": "text",
+              "id": "service_title",
+              "label": "Title",
+              "default": "FREE RETURN"
+          },
+		  {
+              "type": "textarea",
+              "id": "service_description",
+              "label": "Description",
+              "default": "30 days money back guarantee!"
+          }
+        ]
+       }
+    ],
+"presets":[
+	{
+		"name": "service",
+		"category": "service"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

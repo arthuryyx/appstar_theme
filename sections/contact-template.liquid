@@ -1,0 +1,286 @@
+{% if section.settings.contact_map_enable %}
+<!-- googleMap-area-start -->
+<div class="map-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+       {% include 'contact-map' %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- googleMap-end -->
+{% endif %}
+{% if section.settings.contact_information_form_enable %}
+<!-- contact-area-start -->
+<div class="contact-area">
+  <div class="container">
+    <div class="row">
+      
+        {% if section.settings.contact_info_enable %}
+      <div class="{% if section.settings.contact_form_enable %}col-lg-6 col-md-6{% else %}col-lg-12 col-md-12{% endif %} col-sm-6 col-xs-12">
+        <div class="contact-info">
+          <h3>{{ section.settings.contact_info_title }}</h3>
+          <ul>
+            {% if section.settings.contact_info_1 != '' and section.settings.contact_icon_1 != '' %}
+            <li>
+              <i class="fa fa-{{ section.settings.contact_icon_1 }}"></i>
+              {{ section.settings.contact_info_1 }}							
+            </li>
+            {% endif %}
+            {% if section.settings.contact_info_2 != '' and section.settings.contact_icon_2 != '' %}
+            <li>
+              <i class="fa fa-{{ section.settings.contact_icon_2 }}"></i>
+              {{ section.settings.contact_info_2 }}
+            </li>
+            {% endif %}
+            {% if section.settings.contact_info_3 != '' and section.settings.contact_icon_3 != '' %}
+            <li>
+              <i class="fa fa-{{ section.settings.contact_icon_3 }}"></i>
+              {{ section.settings.contact_info_3 }}
+            </li>
+             {% endif %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      {% if section.settings.contact_form_enable %}
+      <div class="{% if section.settings.contact_info_enable %}col-lg-6 col-md-6{% else %}col-lg-12 col-md-12{% endif %} col-sm-6 col-xs-12">
+        <div class="contact-form">
+          <h3>{{ section.settings.contact_form_title }}</h3>
+          {% form 'contact' %}
+          {% if form.posted_successfully? %}
+          <p class="note form-success">Your Message has been send sucessfully!</p>
+          {% endif %}
+          {{ form.errors | default_errors }}
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="single-form-3">
+                <input type="text" {% if form.error contains 'name' %}error{% endif %} name="contact[name]" id="contactFormName" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"  placeholder="{{ section.settings.name_placeholder }}">
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="single-form-3">
+                  <input type="email" {% if form.error contains 'email' %}error{% endif %} name="contact[email]" id="contactEmail" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" placeholder="{{ section.settings.email_placeholder_2 }}">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="single-form-3">
+            <input type="subject" {% if form.error contains 'email' %}error{% endif %} name="contact[subject]" id="contactSubject" value="{% if form.subject %}{{ form.subject }}{% elsif customer %}{{ customer.subject }}{% endif %}" placeholder="{{ section.settings.subject_placeholder_3 }}">
+          </div>
+
+          <div class="single-form-3">
+            <textarea name="contact[body]" {% if form.error contains 'body' %}error{% endif %} placeholder="{{ section.settings.massage_placehoder }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            <input  type="submit" value="Submit">
+          </div>
+          {% endform %}
+        </div>	
+      </div>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+<!-- contact-area-end -->
+{% endif %}
+
+
+<style>
+ 
+  .map-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+  .contact-area{
+    padding-top:{{ section.settings.section_padding_top_1 }}px;
+  }
+   .contact-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Contact",
+    "settings": [
+	  {
+		"type": "checkbox",
+		"id": "contact_map_enable",
+		"label": "Show Map",
+		"default": true
+	  },
+	  {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "header",
+        "content": "Map"
+      },
+      {
+        "type": "text",
+        "id": "api_key",
+        "label": "API Key",
+        "info": "AIzaSyAlZPf84AAVt8_FFN7rwQY5nPgB02SlTKs",
+        "default": "AIzaSyAlZPf84AAVt8_FFN7rwQY5nPgB02SlTKs"
+      },
+      {
+        "type": "text",
+        "id": "latlong",
+        "label": "Latitude longitude",
+        "info": "30.249796, -97.754667",
+        "default": "30.249796, -97.754667"
+      },
+      {
+        "type": "image_picker",
+        "id": "map_icon",
+        "label": "Map Icon",
+		"info": "Recommended Size: 50 x 50px"
+      },
+      {
+        "type": "header",
+        "content": "Contact Information Total Area"
+      },
+	  {
+		"type": "checkbox",
+		"id": "contact_information_form_enable",
+		"label": "Show Contact Information And Contact Form",
+		"default": true
+	  },
+	   {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top_1",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "header",
+        "content": "Contact Information"
+      },
+	  {
+		"type": "checkbox",
+		"id": "contact_info_enable",
+		"label": "Show Contact Information",
+		"default": true
+	  },
+      {
+        "type": "text",
+        "id": "contact_info_title",
+        "label": "Contact Info Title",
+		"default" : "Contact info"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_icon_1",
+        "label": "Contact Info Icon",
+		"default": "map-marker"
+      },
+	  {
+        "type": "textarea",
+        "id": "contact_info_1",
+        "label": "Contact Info #1",
+		"default": "<span>Address</span>1234 Pall Mall Street, London England ",
+		"info": "Use Of Span"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_icon_2",
+        "label": "Contact Info Icon",
+		"default": "envelope"
+      },
+	  {
+        "type": "textarea",
+        "id": "contact_info_2",
+        "label": "Contact Info #2",
+		"default": "<span>Phone</span>(800) 0123 4567 890 ",
+		"info": "Use Of Span"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_icon_3",
+        "label": "Contact Info Icon",
+		"default": "mobile"
+      },
+	  {
+        "type": "textarea",
+        "id": "contact_info_3",
+        "label": "Contact Info #3",
+		"default": "<span>Email</span>info@bootexperts.com",
+		"info": "Use Of Span"
+      },
+      {
+        "type": "header",
+        "content": "Contract Form"
+      },
+	  {
+		"type": "checkbox",
+		"id": "contact_form_enable",
+		"label": "Show Contact Form",
+		"default": true
+	  },
+      {
+        "type": "text",
+        "id": "contact_form_title",
+        "label": "Contract Form Title",
+		"default": "Leave a Message"
+      },
+      {
+        "type": "text",
+        "id": "name_placeholder",
+        "label": "Input Field Name Placeholder",
+        "default": "Your Name"
+      },
+      {
+        "type": "text",
+        "id": "email_placeholder_2",
+        "label": "Input Field Email Placeholder",
+        "default": "Your Email"
+      },
+      {
+        "type": "text",
+        "id": "subject_placeholder_3",
+        "label": "Input Field Subject Placeholder",
+        "default": "Subject"
+      },
+      {
+        "type": "text",
+        "id": "massage_placehoder",
+        "label": "Input Field Massage Placeholder",
+        "default": "Your Massage"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

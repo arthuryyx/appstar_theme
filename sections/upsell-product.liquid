@@ -1,0 +1,147 @@
+
+
+
+
+
+
+
+{% if  section.settings.upsell_products_enable %}
+<!-- onsaleproduct-area-start -->
+<div class="onsaleproduct-area single-product-padding-2" id="onlsale-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        {% if section.settings.collection_title != '' %}
+        <div class="section-title">
+          <h2>{{ section.settings.collection_title }}</h2>
+        </div>
+        {% endif %}
+        <div class="saleproduct-active related-product-active">
+         
+          {% assign collection = collections[section.settings.collection] %}
+          {% for product in collection.products %}
+
+          {% include 'product-grid-item' %}
+
+		  {% endfor %}
+          
+        </div>	
+      </div>
+    </div>
+  </div>
+</div>
+<!-- onsaleproduct-area-end -->
+{% endif %}
+
+
+
+<style>
+ 
+  #onlsale-{{ section.id }}.single-product-padding-2{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   #onlsale-{{ section.id }}.single-product-padding-2{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+  
+  
+</style> 
+
+<script>
+  
+  /*----------------------------
+ saleproduct-active
+------------------------------ */  
+  $("#onlsale-{{ section.id }} .related-product-active").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+      items : {{ section.settings.product_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.product_coloum }}],
+	  itemsDesktopSmall : [992,{{ section.settings.product_coloum }}],
+	  itemsTablet: [768,2],
+	  itemsMobile : [479,1],
+  });
+  
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "Upsell Product",
+    "settings": [
+        {
+        	"type": "header",
+        	"content": "Section Margin"
+        },
+        {
+        	"type": "text",
+        	"id": "section_margin_top",
+        	"label": "Section Margin Top",
+        	"default": "0" ,
+        	"info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+        	"type": "text",
+        	"id": "section_margin_bottom",
+        	"label": "Section Margin Bottom",
+        	"default": "80" ,
+        	"info": "Defined in pixels. Do not add the 'px' unit."
+        },
+		{
+            "type": "checkbox",
+            "id": "upsell_products_enable",
+            "label": "Show Upsell Products",
+            "default": true
+        },
+		{
+             "type": "text",
+             "id": "collection_title",
+             "label": "Related Product Title",
+			 "default": "Unsell Products"
+		},
+        {
+          	"type": "collection",
+         	 "id": "collection",
+          	"label": "select your collection"
+        },
+        {
+          "type": "select",
+          "id": "product_coloum",
+          "label": "Product Limit",
+          "options":[
+            {
+              "value":"3",
+              "label": "3 products"
+            },
+            {
+              "value":"4",
+              "label": "4 products"
+            },
+            {
+              "value":"5",
+              "label": "5 products"
+            },
+            {
+              "value":"6",
+              "label": "6 products"
+            }
+
+          ],
+
+          "default": "5"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

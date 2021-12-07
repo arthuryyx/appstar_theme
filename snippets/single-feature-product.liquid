@@ -1,0 +1,59 @@
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+
+{% assign on_out = true %}
+{% if product.available %}
+{% assign on_out = false %}
+{% endif %}
+
+
+
+
+
+<!-- single-product-start -->
+<div class="single-product">
+
+  <div class="product-img">
+    <a href="{{ product.url | within: 'collection' }}"><img src="{{ product.featured_image.src | img_url : 'large' }}" alt="img" /></a>
+  </div>
+  <div class="product-text">
+    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="price">
+      <ul>      
+        {% if on_sale %}
+        <li><span class="new-price">{{ product.price | money }}</span></li>
+        <li><span class="old-price">{{ product.compare_at_price | money }}</span></li>
+        {% else %}
+        <li><span class="new-price">{{ product.price | money }}</span></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="link-button">
+      <ul>
+        {% if product.description contains '[affiliate_link]' %}
+        {% assign affiliate_link_first = product.description | split:'[/affiliate_link]' | first %}
+        {% assign affiliate_link_final = affiliate_link_first | split:'[affiliate_link]' | last %}
+        <li>
+          <a href="{{ affiliate_link_final }}"><i class="fa fa-cart-plus"></i></a>
+        </li>
+        <li>{% include 'wishlist-button' %}</li>
+        <li>
+          <a href="javascript:void(0);" class="action-btn quick-view" onclick="quiqview('{{ product.handle | handleize }}')" class="quick-view" data-toggle="modal" data-target="#quickViewModal"><i class="fa fa-eye"></i></a>
+        </li>
+        {% else %}
+        <li>
+          <a href="javascript:void(0);" class="action-btn cart" onclick="{{ func }}; return false;" title="{{ 'products.product.add_to_cart' | t }}"><i class="fa fa-cart-plus"></i></a>
+        </li>
+        <li>{% include 'wishlist-button' %}</li>
+        <li>
+          <a href="javascript:void(0);" class="action-btn quick-view" onclick="quiqview('{{ product.handle | handleize }}')" class="quick-view" data-toggle="modal" data-target="#quickViewModal"><i class="fa fa-eye"></i></a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- single-product-end -->

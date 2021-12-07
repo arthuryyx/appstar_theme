@@ -1,0 +1,11 @@
+<div class="left-menu">
+  <ul>   
+    <li>
+      {% assign tab_menu_handle = block.settings.tab_menu %}
+      {% for link in linklists[tab_menu_handle].links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </li>
+  </ul>
+
+</div>

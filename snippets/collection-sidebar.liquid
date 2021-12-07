@@ -1,0 +1,203 @@
+<div class="left-product">
+  {% if settings.side_bar_title != '' %}
+  <div class="left-title">
+    <h3>{{ settings.side_bar_title }}</h3>
+  </div>
+  {% endif %}
+  {% if section.settings.filter_option_enable %}
+  <div class="single-left-area mb-40">
+    {% if settings.filter_title != '' %}
+    <h3>{{ settings.filter_title }}</h3>
+    {% endif %}
+    <div class="collapses-group">
+      
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        
+        {% if section.settings.category_enable %}
+        <div class="panel panel-default">
+          
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+               {{ settings.category_title }}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              <ul>
+                {% assign category_list_limit = settings.category_list_limit_handle %}
+      			{% for category in collections limit: category_list_limit %}
+                <li><a href="{{ category.url }}">{{ category.title }}<span>({{ category.products_count }})</span></a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.color_enable %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                {{ settings.color_title }}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              <ul class="color">
+                {% assign tags = settings.color_picker | replace: ', ', ',' |  replace: ', ', ',' | split: ',' %}
+                {% assign color_list_limit = settings.color_list_limit_handle %}
+                {% for tag-2 in tags limit:color_list_limit %}
+                {% assign tag = tag-2 | strip %}
+                {% if collection.all_tags contains tag %}
+                <li class="{% if current_tags contains tag %}active{% endif %}"><a href="/collections/all/{{ tag | handle }}" style="background: {{ tag }}">{{ tag }}</a></li>
+                {% endif %}
+     			{% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.brand_enable %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                {{ settings.brand_title }}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+              <ul>
+                {% assign vendor_list_limit = settings.vendor_list_limit_handle  %}
+      			{% for vendor in shop.vendors limit: vendor_list_limit %}
+                <li><a href="{{ vendor | url_for_vendor }}">{{ vendor }}</a></li>
+                {% endfor %} 
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.product_type_enable %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFour">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                {{ settings.product_type }}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+            <div class="panel-body">
+              <ul>
+                {% assign producyt_type_limit = settings.producyt_type_limit_handle  %}
+      			{% for type in shop.types limit: producyt_type_limit %}
+      			{% if type != '' %}
+                <li><a href="{{ type | url_for_type }}">{{ type }}</a></li>
+                {% endif %}
+     			{% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.size_enable %}
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingFive">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                {{ settings.size_title }}
+              </a>
+            </h4>
+          </div>
+          <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+            <div class="panel-body">
+              <ul>
+                {% assign tags = settings.size_picker | replace: ', ', ',' | replace: ', ', ',' | split: ','  %}
+                {% assign size_list_limit = settings.size_list_limit_handle %}
+                {% for tag-2 in tags limit:size_list_limit %}
+                {% assign tag = tag-2 | strip %}
+                {% if collection.all_tags contains tag %}
+                <li><a href="/collections/all/{{ tag | handle }}">{{ tag }}</a></li>
+                {% endif %}
+      			{% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if section.settings.tag_enable %}
+  <div class="left-title">
+    <h3>{{ settings.tag_title }}</h3>
+  </div>
+  <div class="single-left-area product-categories-tag mb-40">
+    <ul>
+      {% assign collection_tag_limit = settings.collection_tag_limit_handle %}
+      {% for tag in collection.tags limit: collection_tag_limit %}
+      <li>
+        <a href="/collections/all/{{ tag | handle }}">{{ tag }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  {% if section.settings.best_seller_enable  %}
+  <div class="left-title">
+    <h3>{{ settings.best_seller_title }}</h3>
+  </div>
+  <div class="single-left-area-2 mb-40">
+
+    <div class="bestsellerproduct-active">
+
+      
+      <div class="single-bestseller">
+
+        {% assign collection = collections[settings.collection_3] %}
+        {% for product in collection.products limit: settings.bestselling_limit %}              
+        <!-- single-product-start -->
+        <div class="single-product {% unless forloop.last %}border-bottom{% endunless %}">
+          <div class="product-img">
+            <a href="{{ product.url | within: 'collection' }}"><img src="{{ product.featured_image.src | img_url : '280x' }}" alt="product-img" /></a>
+          </div>
+          <div class="product-text">
+            <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            <div class="rating">
+              <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            </div>
+            <div class="price">
+              <ul>
+                {% if on_sale %}
+                <li><span class="new-price">{{ product.price | money }}</span></li>
+                <li><span class="old-price">{{ product.compare_at_price | money }}</span></li>
+                {% else %}
+                <li><span class="new-price">{{ product.price | money }}</span></li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- single-product-end -->
+
+        {% endfor %}
+
+      </div>     
+
+    </div>
+
+  </div>
+  {% endif %}
+  {% if section.settings.banner_area_enable  %}
+  <div class="banner">
+    <div class="banner-img">
+      <a href="{{ settings.banner_img_url }}"><img src="{% if settings.banner_img %}{{ settings.banner_img | img_url: 'master' }}{% else %}http:\/\/via.placeholder.com\/ 270x324{% endif %}" alt="banner" /></a>
+    </div>
+  </div>
+  {% endif %}
+</div>

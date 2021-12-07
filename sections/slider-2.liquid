@@ -1,0 +1,145 @@
+
+<!-- slider-area-start -->
+<div class="slider-area slider-area-2 home-2">
+  <div class="container">
+    <div class="row">
+      <div class="{% if section.settings.slider_coloum_offset %}col-lg-offset-3 col-md-offset-3 col-lg-9 col-md-9{% else %}col-lg-12 col-md-12{% endif %} col-sm-12 col-xs-12">
+        <!-- slider-main-start -->
+        <div class="slider-main">
+         {% include 'slider-main' %}
+        </div>
+        <!-- slider-main-end -->
+      </div>	
+    </div>
+  </div>
+</div>
+<!-- slider-area-end -->
+
+<style>
+ 
+  .slider-area-2{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .slider-area-2{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "slider",
+    "settings": [
+			 {
+                "type": "header",
+                "content": "Section Padding"
+             },
+             {
+                "type": "text",
+                "id": "section_padding_top",
+                "label": "Section Padding Top",
+                "default": "0" ,
+                "info": "Defined in pixels. Do not add the 'px' unit."
+             },
+             {
+                "type": "text",
+                "id": "section_padding_bottom",
+                "label": "Section Padding Bottom",
+                "default": "0" ,
+                "info": "Defined in pixels. Do not add the 'px' unit."
+             },
+			 {
+        		"type": "checkbox",
+        		"id": "slider_coloum_offset",
+       			"label": "Slider Coloum Offset",
+       			"default": true
+     	     }
+		],
+		"blocks":[
+        {
+           "type": "slider",
+           "name": "slider",
+           "settings": [
+              {
+                  "type": "image_picker",
+                  "id": "slider-img",
+                  "label": "Image",
+                  "info": "Recommended Size: 900 x 490px"
+              },
+              {
+                  "type": "url",
+                  "id": "slider-img_url",
+                  "label": "URL"
+              },
+              {
+                "type": "radio",
+                "id": "slider_position",
+                "label": "Content Position",
+                "options":[                        
+                  {
+                  "label": "Left",
+                  "value": "slider_left"
+                  },
+                  {
+                  "label": "center",
+                  "value": "slider_center"
+                  },
+                  {
+                  "label": "Right",
+                  "value": "slider_right"
+                  }
+                ],
+                  "default": "slider_left"
+              },
+              {
+                  "type": "text",
+                  "id": "slider_title",
+                  "label": "Slider Title",
+                  "default": "Cooking made <br> Super easy",
+                  "info": "Use <br> for line break"
+              },
+              {
+                  "type": "text",
+                  "id": "slider_subtitle",
+                  "label": "Slider Subtitle",
+                  "default": "20%<span>Off</span>",
+                  "info": "Use <span> for small text"
+              },
+              {
+                  "type": "text",
+                  "id": "sider_product_name",
+                  "label": "Slider Product Name",
+                  "default": "Premium cookers",
+                  "info": "Use Slider Product Name"
+              },
+              {
+                  "type": "text",
+                  "id": "slider_button",
+                  "label": "Button",
+                  "default": "SHOP NOW"
+              },
+              {
+                  "type": "url",
+                  "id": "slider_button_url",
+                  "label": "URL"
+              }
+          ]
+         }
+      ],
+    "presets":[
+        {
+            "name": "slider",
+            "category": "slider"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

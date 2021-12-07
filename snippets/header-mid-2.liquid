@@ -1,0 +1,31 @@
+<!-- header-min-area-start -->
+<div class="header-min-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <!-- logo-area-start -->
+        <div class="logo-area">
+          {% if section.settings.logo %}
+          <a href="/"><img src="{% if section.settings.logo %}{{ section.settings.logo | img_url: 'compact' }}{% else %}http:\/\/via.placeholder.com\/194x58{% endif %}" alt="{{ shop.name }}" /></a>
+          {% else %}
+          <a href="/">{{ shop.name }}</a>
+          {% endif %}
+        </div>
+        <!-- logo-area-end -->
+      </div>
+      <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
+		{% include 'main-menu' %}
+        <div class="box-haeder">
+          <div class="icon">
+            <a href="{{ section.settings.contact_icon_url }}"><i class="zmdi zmdi-{{ section.settings.contact_icon }} zmdi-hc-fw"></i></a>
+          </div>
+          <div class="text">
+            <h2>{{ section.settings.contact_number }}</h2>
+            <p>{{ section.settings.contact_description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- header-min-area-start -->

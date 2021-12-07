@@ -1,0 +1,173 @@
+
+<!-- blog-main-area-start -->
+<div class="blog-main-area">
+  <div class="container">
+    <div class="row">
+      
+      <div class="{% if section.settings.blog_sidebar_position == 'no_sidebar' %}col-lg-12 col-md-12{% else %}col-lg-9 col-md-9{% endif %} col-sm-12 col-xs-12 {% if section.settings.blog_sidebar_position == 'left_sidebar' %} pull-right{% endif %}">
+        
+        <div class="blog-main-wrapper">
+          <div class="row">
+          {% assign single_blog_limit = section.settings.single_blog_limit_handle %}
+          {% paginate blog.articles by single_blog_limit %}
+          
+          
+          
+          {% for article in blog.articles %}
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          {% include 'blog-grid-item' %}
+          </div>
+          {% endfor %}
+          
+          <div class="blog-pagination text-center mt-50">
+           {% include 'pagination' %}
+          </div>	
+          
+          {% endpaginate %}
+          </div>
+        </div>
+      </div>
+      {% unless section.settings.blog_sidebar_position == 'no_sidebar' %}
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        {% include 'blog-sidebar' %}
+      </div>
+      {% endunless %}
+    </div>
+  </div>
+</div>
+<!-- blog-main-area-end -->
+
+<style>
+
+  .blog-main-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .blog-main-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+</style>
+
+
+
+
+{% schema %}
+  {
+    "name": "Blog Template",
+    "settings": [
+	   {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "select",
+        "id": "single_blog_limit_handle",
+        "label": "Post Limit",
+        "options": [
+          {
+            "label": "4 Posts",
+            "value": "4"
+          },
+		  {
+            "label": "6 Posts",
+            "value": "6"
+          },
+		  {
+            "label": "8 Posts",
+            "value": "8"
+          },
+          {
+            "label": "9 Posts",
+            "value": "9"
+          },
+		  {
+            "label": "10 Posts",
+            "value": "10"
+          },
+          {
+            "label": "12 Posts",
+            "value": "12"
+          }
+        ],
+        "default": "9"
+      },
+      {
+        "type": "text",
+        "id": "red_more",
+        "label": "Red More Button",
+		"default": "Read More"
+      },
+      {
+		"type": "header",
+		"content": "Blog SideBar Position"
+	  },
+      {
+        "type": "radio",
+        "id": "blog_sidebar_position",
+        "label": "Sidebar Position",
+        "options": [
+          {
+            "label": "Left",
+            "value": "left_sidebar"
+          },
+          {
+            "label": "Right",
+            "value": "right_sidebar"
+          },
+          {
+            "label": "Without Sidebar",
+            "value": "no_sidebar"
+          }
+        ],
+        "default": "left_sidebar"
+      },
+	  {
+		"type": "paragraph",
+		"content": "Sidebar Widget/List"
+	  },
+	  {
+		"type": "checkbox",
+		"id": "search_enable",
+		"label": "Show Search",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "blog_post_enable",
+		"label": "Show Recent Post",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "blog_arcive_enable",
+		"label": "Show Archive",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "blog_tag_enable",
+		"label": "Show Tag",
+		"default": true
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

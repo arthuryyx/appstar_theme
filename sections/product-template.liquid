@@ -1,0 +1,305 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<!-- product-main-area-start -->
+<div class="product-main-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">   
+        <div class="{% if product.images.size > 1 %}col-lg-5 col-md-5 col-sm-5{% else %}col-lg-6 col-md-6 col-sm-6{% endif %} col-xs-12">
+
+          <!-- Place somewhere in the <body> of your page -->
+          <div id="slider" class="flexslider">
+            <ul class="slides">
+              {% assign feature_product = current_variant.featured_product | default: product.featured_image %}
+              {% for image in product.images %}
+              <li>
+                <a rel="group1" id="single_image" href="{{ image.src | img_url: 'master' }}">
+                	<img  src="{{ image.src | img_url: 'master' }}" alt="product-image" />
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% if product.images.size > 1 %}
+          <div id="carousel" class="flexslider">
+            <ul class="slides">
+              {% for image in product.images %}
+              <li>
+                	<img src="{{ image.src | img_url: 'compact' }}" alt="product-image" />
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+      
+      <div class="{% if product.images.size > 1 %}col-lg-7 col-md-7 col-sm-7{% else %}col-lg-6 col-md-6 col-sm-6{% endif %} col-xs-12">
+        <div class="product-info-main">
+
+          <form action="/cart/add" method="post" enctype="multipart/form-data" id="add-item-form">
+            <p class="product-single__vendor">{{ product.vendor }}</p>
+            <div class="page-title">
+              <h1>{{ product.title }}</h1>
+            </div>
+            <div class="product-reviews-summary">
+              <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+            </div>
+            <div class="product-info-price">
+
+              <div class="price-final">
+                <span id="ProductPrice" class="new">{{ product.selected_or_first_available_variant.price | money }}</span>
+                {% if product.compare_at_price_max > product.price %}
+                <del><span id="ComparePrice" class="old">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span></del>
+                {% endif %}
+              </div>
+              <div class="product-info-stock-sku">
+<!--                 <span>{{ section.settings.in_stock_title }}</span> -->
+                <div class="product-attribute">
+                  <span>{{ section.secttings.sku_title }}</span>
+                  
+                  <span class="value ">
+                  	{% if current_variant.inventory_policy == "continue" %}
+                    	Pre-Order
+                    {% elsif product.available %}
+<!--                     	In Stock -->
+                    {% else %}
+                    	Out of Stock
+                    {% endif %}
+                  </span>
+                </div>
+                	{% assign current_variant = product.selected_or_first_available_variant %}
+                 	<span class="variant-sku">{{ current_variant.sku }}</span>                
+              </div>  
+            </div>
+            
+            <select name="id" id="productSelect" class="product-single__variants email s-email s-wid" style="display:none;">
+              {% for variant in product.variants %}
+              {% if variant.available %}
+              <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+              {% else %}
+              <option disabled="disabled">
+                {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+              </option>
+              {% endif %}
+              {% endfor %}
+            </select>  
+            {% if product.available and product.variants.size > 1 %}
+            {% for option in product.options %}
+            {% include 'swatch' with option %}
+            {% endfor %}
+            {% endif %}                    
+            <script>
+              jQuery(function() {
+                jQuery('.swatch :radio').change(function() {
+                  var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
+                  var optionValue = jQuery(this).val();
+                  jQuery(this)
+                  .closest('form')
+                  .find('.single-option-selector')
+                  .eq(optionIndex)
+                  .val(optionValue)
+                  .trigger('change');
+                });
+              });
+            </script>
+
+            
+            {% if product.description contains '[affiliate_link]' %}
+            
+            
+             <div class="product-add-form">
+               
+			{% assign affiliate_link_first = product.description | split:'[/affiliate_link]' | first %}
+            {% assign affiliate_link_final = affiliate_link_first | split:'[affiliate_link]' | last %}
+
+              <a href="{{ affiliate_link_final }}"><i class="fa fa-shopping-cart"></i>{{ settings.add_to_cart_button_title }}</a>
+
+
+            </div>
+            
+            {% else %}
+            <div class="product-add-form">
+
+              {% if current_variant.inventory_policy == "continue" %}
+              	<div class="quality-button">
+					<input class="qty" type="text" value="1" name="quantity">  
+              	</div>
+                <button name="add" type="submit" id="AddToCart" class="addtocart cart-item">
+                  <i class="fa fa-shopping-cart"></i>
+                  <i class="fa fa-circle-o-notch fa-spin"></i>
+                  <i class="fa fa-check"></i>
+                  <i class="fa fa-times"></i>
+                  Pre-Order
+                </button>
+              {% elsif product.available %}
+                <div class="quality-button">
+                  <input class="qty" type="text" value="1" name="quantity">  
+                </div>
+                <button name="add" type="submit" id="AddToCart" class="addtocart cart-item">
+                  <i class="fa fa-shopping-cart"></i>
+                  <i class="fa fa-circle-o-notch fa-spin"></i>
+                  <i class="fa fa-check"></i>
+                  <i class="fa fa-times"></i>
+                  Add to cart
+                </button>
+              {% endif %}
+              
+              
+              <script>
+                jQuery('.addtocart').click(function(e) {
+                  e.preventDefault();
+                  Shopify.addItemFromFormStart('add-item-form', {{ product.id }});
+                 });
+              </script>
+              <div class="product-social-links">
+              <div class="product-addto-links">
+                {% include 'wishlist-button-2' %}
+              </div>
+              <div class="product-addto-links-text">
+                {% if product.description contains '[short_description]' %}
+
+
+                {% assign short_description_first = product.description | split: '[/short_description]' | first %}
+                {% assign short_description_final = short_description_first | split: '[short_description]' | last %}
+                {{ short_description_final }}
+
+                {% endif %}
+
+              </div>
+            </div>
+
+            </div>
+            {% endif %}
+
+          </form>
+			<div>
+              <div>
+                    <h5>Deliver to your Door</h5>
+              </div>
+                  <span>Nationwide Delivery in&nbsp;3-7 working days</span>
+              <p></p>
+              <div>
+                    <h5>Collect in Store</h5>
+              </div>
+              <span>We'll notify you by email when your item is ready to pick up.</span>
+              <!--<span>Ready to Collect in&nbsp;3-7 working days</span>-->
+              
+         	 </div>  
+        </div>
+      </div>
+    </div><!--central-->
+    </div><!--row end-->
+  </div>
+  <!-- product-main-area-end -->
+</div>
+ 
+<style>
+ 
+  .product-main-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .product-main-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  
+</style> 
+  
+<script>
+
+    
+/*----------------------------
+ flexslider-slider active
+------------------------------ */
+       $('#carousel').flexslider({
+    animation: "slide",
+    controlNav: false,
+    animationLoop: false,
+    slideshow: false,
+    itemWidth: {{ section.settings.them_img_width }},
+    itemMargin: {{ section.settings.them_img_margin }},
+    asNavFor: '#slider'
+  });
+ 
+  $('#slider').flexslider({
+    animation: "slide",
+    controlNav: false,
+    animationLoop: false,
+    slideshow: false,
+    sync: "#carousel"
+  });
+      
+  
+  
+</script>
+
+  
+  
+
+
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+		{
+  			"type": "header",
+  			"content": "Section Padding"
+  		},
+        {
+          "type": "text",
+          "id": "section_padding_top",
+          "label": "Section Padding Top",
+          "default": "80" ,
+          "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+          "type": "text",
+          "id": "section_padding_bottom",
+          "label": "Section Padding Bottom",
+          "default": "0" ,
+          "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+		{
+			"type": "header",
+			"content": "Slider Image"
+		},
+		{
+			"type": "text",
+			"id": "them_img_width",
+			"label": "Carousel Thum Image",
+			"default": "110",
+			"info": "110"
+		},
+		{
+			"type": "text",
+			"id": "them_img_margin",
+			"label": "Carousel Thum Image Margin",
+			"default": "5",
+			"info": "5"
+		},
+		{
+			"type": "header",
+			"content": "Product Info"
+		},
+  		{
+          "type": "text",
+          "id": "in_stock_title",
+          "label": "In stock Title",
+          "default": "In stock :"
+        },
+  		{
+          "type": "text",
+          "id": "sku_title",
+          "label": "Sku Title",
+          "default": "SKU :"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

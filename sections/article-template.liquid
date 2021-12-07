@@ -1,0 +1,292 @@
+
+<!-- blog-main-area-start -->
+<div class="blog-main-area">
+  <div class="container">
+    <div class="row">
+      <div class="{% if section.settings.blog_sidebar_position == 'no_sidebar' %}col-lg-12 col-md-12{% else %}col-lg-9 col-md-9{% endif %} col-sm-12 col-xs-12 {% if section.settings.blog_sidebar_position == 'left_sidebar' %} pull-right{% endif %}">
+        <div class="blog-main-wrapper">
+          <div class="blog-img mb-30">
+            <a href="{{ article.url }}"><img src="{{ article | img_url : 'master' }}" alt="blog" /></a>
+          </div>
+          <div class="single-blog-content">
+            <div class="single-blog-title">
+              <h3>{{ article.title }}</h3>
+            </div>
+            <div class="blog-single-content">
+              {{ article.content }}
+            </div>
+          </div>
+          <div class="comment-tag">
+            <p><a href="{{ article.url }}#comments">{{ 'blogs.comments.with_count' | t: count: article.comments_count }}</a>/ Tags:
+              {% assign blog_limit = settings.blog_limit_handle %}
+      			{% for tag in blog.all_tags limit: blog_limit %}
+              <a href="{{ article.url }}">{{ tag }}</a>
+              {% endfor %}
+            </p>
+          </div>
+          <div class="sharing-post mt-20">
+            <div class="share-text">
+              <span>{{ section.settings.share_title }}</span>
+            </div>
+            <div class="share-icon">
+                {% include 'blog-shar' %}
+            </div>
+          </div>
+          
+          {% if article.comments.size > 0 %}
+    
+          <div class="comment-title-wrap mt-30">
+            <h3>{{ section.settings.article_comment_title }}</h3>
+          </div>
+          {% if comment and comment.created_at %}
+          <div id="comments" class="comment-success">
+            <p class="note form-success">
+              {% if blog.comments_modareted? %}
+              {{ 'blogs.comments.success_moderated' | t }}            
+              {% else %}
+              {{ 'blogs.comments.success' | t }}
+              {% endif %}
+            </p>
+          </div>
+          {% endif %}
+          <div class="comment-reply-wrap mt-50">
+            <ul>
+              {% assign comment_post_limit = section.settings.comment_post_limit_handle %}
+              {% paginate article.comments by comment_post_limit %}
+              {% for comment in article.comments %}
+              <li>
+                <div class="public-comment">
+                  <div class="comment-img">
+                    <img src="{% if section.settings.user %}{{ section.settings.user | img_url: 'smaill' }}{% else %}http:\/\/via.placeholder.com\/95x95{% endif %}" alt="{{ article.user.alt }}" />
+                  </div>
+                  <div class="public-text">
+                    <div class="single-comm-top">
+                      {% capture author %}<h2>{{ comment.author }}</h2>{% endcapture %}
+                      <p>{{ article.published_at | date: "%d %b %y" }}</p>
+                      <span>{{ 'blogs.comments.with_count' | t: count: article.comments_count }}</span>
+                    </div>
+                    {{ comment.content }}
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+              <li>
+                {% if paginate.pages > 1 %}
+                <div class="blog-pagination text-center">
+                  {% include 'pagination' %} 
+                </div>
+                {% endif %} 
+                {% endpaginate %}
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+          
+          {% form 'new_comment', article %}
+          <div class="comment-title-wrap mt-30">
+            <h3>{{ section.settings.article_form_title }}</h3>
+          </div>
+          <div class="comment-input mt-40">
+              <div class="comment-input-textarea mb-30">
+               <textarea {% if form.errors contains 'body' %}error{% endif %} placeholder="{{ section.settings.massage_placehoder }}" name="comment[body]" id="commentBody">{{ form.body }}</textarea>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="single-comment-input mb-30">
+                    <input placeholder="{{ section.settings.name_placeholder }}" type="text" name="comment[author]" id="commentAuthor" value="{{ form.author }}">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="single-comment-input mb-30">
+                    <input placeholder="{{ section.settings.email_placeholder_2 }}" type="email" name="comment[email]" id="commentEmail" value="{{ form.email }}">
+                  </div>
+                </div>
+              </div>
+              <div class="single-post-button">
+                <button type="submit">Post Comment</button>
+              </div>
+          </div>
+          {% endform %}
+        </div>
+      </div>
+      {% unless section.settings.blog_sidebar_position == 'no_sidebar' %}
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+		{% include 'blog-sidebar' %}
+      </div>
+      {% endunless %}
+    </div>
+  </div>
+</div>
+<!-- blog-main-area-end -->
+
+
+
+
+
+<style>
+
+  .blog-main-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .blog-main-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Article Themplate",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "article_comment_title",
+        "label": "Article Comment Title",
+		"default": "Comments"
+      },
+      {
+        "type": "image_picker",
+        "id": "user",
+        "label": "Comment User Image",
+		"info": "Recommended Size: 300 x 373px"
+      },
+      {
+        "type": "select",
+        "id": "comment_post_limit_handle",
+        "label": "Comment Post Limit",
+        "options": [
+          {
+            "label": "2 Comments",
+            "value": "2"
+          },
+          {
+            "label": "3 Comments",
+            "value": "3"
+          },
+          {
+            "label": "5 Comments",
+            "value": "5"
+          }
+        ],
+        "default": "3"
+      },
+      {
+        "type": "text",
+        "id": "article_form_title",
+        "label": "Article Form Title",
+		"default": "Leave a comment "
+      },
+      {
+        "type": "text",
+        "id": "name_placeholder",
+        "label": "Input Field Name Placeholder",
+        "default": "Your Name"
+      },
+      {
+        "type": "text",
+        "id": "email_placeholder_2",
+        "label": "Input Field Email Placeholder",
+        "default": "Your Email"
+      },
+      {
+        "type": "text",
+        "id": "massage_placehoder",
+        "label": "Input Field Massage Placeholder",
+        "default": "Your Massage"
+      },
+	  {
+		"type": "header",
+		"content": "Blog SideBar Position"
+	  },
+      {
+        "type": "radio",
+        "id": "blog_sidebar_position",
+        "label": "Sidebar Position",
+        "options": [
+          {
+            "label": "Left",
+            "value": "left_sidebar"
+          },
+          {
+            "label": "Right",
+            "value": "right_sidebar"
+          },
+          {
+            "label": "Without Sidebar",
+            "value": "no_sidebar"
+          }
+        ],
+        "default": "left_sidebar"
+      },
+	  {
+		"type": "text",
+		"id": "share_title",
+		"label": "share Title",
+		"default": "Share this post"
+	  },
+	  {
+		"type": "paragraph",
+		"content": "Sidebar Widget/List"
+	  },
+	  {
+		"type": "checkbox",
+		"id": "search_enable",
+		"label": "Show Search",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "blog_post_enable",
+		"label": "Show Recent Post",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "blog_arcive_enable",
+		"label": "Show Archive",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "blog_tag_enable",
+		"label": "Show Tag",
+		"default": true
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

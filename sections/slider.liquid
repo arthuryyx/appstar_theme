@@ -1,0 +1,191 @@
+
+<!-- slider-area-start -->
+<div class="slider-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+
+
+        <!-- slider-main-start -->
+        <div class="slider-main">
+          {% include 'slider-main' %}
+        </div>
+        <!-- slider-main-end -->
+        {% if section.settings.slider_banner_enable %}
+        <!-- banner-right-start -->
+        <div class="banner-right">
+          <div class="banner-img">
+            <a href="{{ section.settings.slider-banner_img_1_url }}"><img src="{% if section.settings.slider-banner_img_1 %}{{ section.settings.slider-banner_img_1 | img_url: 'large' }}{% else %}http:\/\/via.placeholder.com\/270x245{% endif %}" alt="banner" /></a>
+            <a href="{{ section.settings.slider-banner_img_2_url }}"><img src="{% if section.settings.slider-banner_img_2 %}{{ section.settings.slider-banner_img_2 | img_url: 'large' }}{% else %}http:\/\/via.placeholder.com\/270x245{% endif %}" alt="banner" /></a>
+          </div>
+        </div>
+        <!-- banner-right-end -->
+        {% endif %}
+
+      </div>	
+    </div>
+  </div>
+</div>
+<!-- slider-area-end -->
+
+
+<style>
+  
+  
+  {% unless section.settings.slider_banner_enable %}
+  .slider-main {
+    width: 100%;
+  }
+  {% endunless %}
+  
+   
+  .slider-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .slider-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "slider with Banner",
+    "settings": [
+			 {
+                "type": "header",
+                "content": "Section Padding"
+             },
+             {
+                "type": "text",
+                "id": "section_padding_top",
+                "label": "Section Padding Top",
+                "default": "0" ,
+                "info": "Defined in pixels. Do not add the 'px' unit."
+             },
+             {
+                "type": "text",
+                "id": "section_padding_bottom",
+                "label": "Section Padding Bottom",
+                "default": "0" ,
+                "info": "Defined in pixels. Do not add the 'px' unit."
+             },
+             {
+                  "type": "header",
+                 "content": "Slider Banner"
+             },
+             {
+                  "type": "checkbox",
+                  "id": "slider_banner_enable",
+                  "label": "Slider Banner",
+                  "default": true
+             },
+             {
+                  "type": "image_picker",
+                  "id": "slider-banner_img_1",
+                  "label": "Image",
+                  "info": "Recommended Size: 270 x 245px"
+             },
+             {
+                  "type": "url",
+                  "id": "slider-banner_img_1_url",
+                  "label": "URL"
+             },
+             {
+                  "type": "image_picker",
+                  "id": "slider-banner_img_2",
+                  "label": "Image",
+                  "info": "Recommended Size: 270 x 245px"
+             },
+             {
+                  "type": "url",
+                  "id": "slider-banner_img_2_url",
+                  "label": "URL"
+             }
+		],
+		"blocks":[
+          {
+             "type": "slider",
+             "name": "slider",
+             "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "slider-img",
+                    "label": "Image",
+                    "info": "Recommended Size: 900 x 490px"
+                },
+                {
+                    "type": "url",
+                    "id": "slider-img_url",
+                    "label": "URL"
+                },
+                {
+                  "type": "radio",
+                  "id": "slider_position",
+                  "label": "Content Position",
+                  "options":[                        
+                    {
+                    "label": "Left",
+                    "value": "slider_left"
+                    },
+                    {
+                    "label": "center",
+                    "value": "slider_center"
+                    },
+                    {
+                    "label": "Right",
+                    "value": "slider_right"
+                    }
+                  ],
+                    "default": "slider_left"
+                },
+                {
+                    "type": "text",
+                    "id": "slider_title",
+                    "label": "Slider Title",
+                    "default": "Cooking made <br> Super easy",
+                    "info": "Use <br> for line break"
+                },
+                {
+                    "type": "text",
+                    "id": "slider_subtitle",
+                    "label": "Slider Subtitle",
+                    "default": "20%<span>Off</span>",
+                    "info": "Use <span> for small text"
+                },
+                {
+                    "type": "text",
+                    "id": "sider_product_name",
+                    "label": "Slider Product Name",
+                    "default": "Premium cookers",
+                    "info": "Use Slider Product Name"
+                },
+                {
+                    "type": "text",
+                    "id": "slider_button",
+                    "label": "Button",
+                    "default": "SHOP NOW"
+                },
+                {
+                    "type": "url",
+                    "id": "slider_button_url",
+                    "label": "URL"
+                }
+             ]
+           }
+    ],
+    "presets":[
+        {
+            "name": "slider with banner",
+            "category": "slider"
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

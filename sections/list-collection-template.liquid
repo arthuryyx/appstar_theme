@@ -1,0 +1,193 @@
+
+<!-- onsaleproduct-area-start -->
+<div class="onsaleproduct-area list-collection">
+  <div class="container">
+    <div class="row">
+      
+      {% for link in linklists.all-collections.links %}
+	  {% assign collection = link.object %}
+      {% unless collection.handle == 'frontpage' %}
+      {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+      
+      <div class="col-lg-12  {% unless forloop.last %}pb-60{% endunless %}">
+        <div class="section-title mr-bttom mb-30">
+          <h2>{{ collection_title }}</h2>
+          <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">More {{ collection_title }} &rsaquo;</a>
+        </div>
+        <div class="saleproduct-active">
+          
+          {% assign list_collection_product_limit = section.settings.list_product_limit_count %}
+          {% for product in collection.products limit: list_collection_product_limit %}
+          {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
+         	{% include 'product-grid-item' %}
+		  {% endfor %}
+        </div>
+      </div>
+	{% endunless %}
+    {% endfor %}
+      
+    </div>
+  </div>
+</div>
+<!-- onsaleproduct-area-end -->
+
+
+<style>
+  
+  .onsaleproduct-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+  .onsaleproduct-area{
+  	padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+</style>
+
+
+
+<script>
+  
+  /*----------------------------
+ saleproduct-active
+------------------------------ */  
+  $(".saleproduct-active").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+    items : {{ section.settings.cursole_product }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.cursole_product }}],
+	  itemsDesktopSmall : [992,{{ section.settings.cursole_product }}],
+	  itemsTablet: [768,2],
+	  itemsMobile : [479,1],
+  });
+      
+  
+</script>
+
+
+
+
+
+
+{% schema %}
+  {
+    "name": "List Collection Template",
+    "settings": [
+	  {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "text",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "default": "80" ,
+        "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "select",
+        "id": "cursole_product",
+        "label": "Cursole Product Limit",
+        "options": [
+          {
+          	"label": "4 Product",
+         	 "value": "4"
+          },
+          {
+          	"label": "5 product",
+          	"value": "5"
+          },
+		  {
+          	"label": "6 Product",
+         	 "value": "6"
+          },
+          {
+          	"label": "7 product",
+         	 "value": "7"
+		  },
+          {
+          	"label": "8 product",
+         	 "value": "8"
+		  }
+        ],
+        "default": "5"
+      },
+      {
+        "type": "select",
+        "id": "list_product_limit_count",
+        "label": "List Product Limit",
+        "options": [
+          {
+          	"label": "4 Product",
+         	 "value": "4"
+          },
+          {
+          	"label": "5 product",
+          	"value": "5"
+          },
+		  {
+          	"label": "6 Product",
+         	 "value": "6"
+          },
+          {
+          	"label": "7 product",
+         	 "value": "7"
+		  },
+          {
+          	"label": "8 product",
+         	 "value": "8"
+		  },
+          {
+          	"label": "9 product",
+         	 "value": "9"
+		  },
+          {
+          	"label": "10 product",
+         	 "value": "10"
+		  },
+          {
+          	"label": "11 product",
+          	"value": "11"
+          },
+          {
+          	"label": "12 product",
+          	"value": "12"
+          },
+          {
+          	"label": "13 product",
+          	"value": "13"
+          },
+          {
+          	"label": "14 product",
+          	"value": "14"
+          },
+          {
+          	"label": "15 product",
+          	"value": "15"
+          },
+          {
+          	"label": "16 product",
+          	"value": "16"
+          }
+        ],
+        "default": "5"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

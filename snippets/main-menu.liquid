@@ -1,0 +1,20 @@
+<div class="main-menu-area  hidden-xs hidden-sm">
+  <ul>
+     {% for link in linklists.main-menu.links %}
+   	 {% assign child_list_handle = link.title | handleize %}
+     {% if linklists[child_list_handle].links != "" %}
+     <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}">{{ link.title }}<i class="fa fa-angle-down"></i></a>
+      <div class="sub-menu">
+        <ul>
+          {% for childlink in linklists[child_list_handle].links %}
+          <li><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+    {% else %}
+    <li {% if link.active %}class="active"{% endif %}><a href="{{ link.url }}">{{ link.title }}</a>
+	{% endif %}
+    {% endfor %} 
+  </ul>
+</div>

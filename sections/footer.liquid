@@ -1,0 +1,229 @@
+
+<!-- footer-area-start -->
+<footer> 
+  {% if section.settings.footer_top_enable %}
+  <!-- footer-top-start -->
+  {% include 'footer-top' %}
+  <!-- footer-top-end -->
+  {% endif %}
+  {% if section.settings.footer_mid_enable %}
+  <!-- footer-mid-start -->
+  {% include 'footer-mid' %}
+  <!-- footer-mid-start -->
+  {% endif %}
+  {% if section.settings.footer_bottom_enable %}
+  <!-- footer-bottom-start -->
+  {% include 'footer-bottom' %}
+  <!-- footer-bottom-end -->
+  {% endif %}
+</footer>
+<!-- footer-area-end -->
+
+<style>
+ 
+  .footer-top{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .footer-top{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  .footer-mid{
+    padding-top:{{ section.settings.section_padding_top_2 }}px;
+  }
+   .footer-mid{
+    padding-bottom:{{ section.settings.section_padding_bottom_2 }}px;
+  }
+   .footer-bottom{
+    padding-top:{{ section.settings.section_padding_top_3 }}px;
+  }
+   .footer-bottom{
+    padding-bottom:{{ section.settings.section_padding_bottom_3 }}px;
+  }
+
+  
+</style> 
+
+
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+	  {
+		"type": "header",
+		"content": "Footer Top Area"
+	  },
+	  {
+      	"type": "header",
+      	"content": "Section Padding"
+      },
+      {
+      	"type": "text",
+      	"id": "section_padding_top",
+      	"label": "Section Padding Top",
+      	"default": "60" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+      	"type": "text",
+      	"id": "section_padding_bottom",
+      	"label": "Section Padding Bottom",
+      	"default": "60" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_top_enable",
+        "label": "Show Footer Top",
+        "default": true
+      },
+	  {
+		"type": "header",
+		"content": "Footer Mid Area"
+	  },
+	  {
+      	"type": "header",
+      	"content": "Section Padding"
+      },
+      {
+      	"type": "text",
+      	"id": "section_padding_top_2",
+      	"label": "Section Padding Top",
+      	"default": "0" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+      	"type": "text",
+      	"id": "section_padding_bottom_2",
+      	"label": "Section Padding Bottom",
+      	"default": "0" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_mid_enable",
+        "label": "Show Footer Mid",
+        "default": true
+      },
+	  {
+		"type": "link_list",
+		"id": "footer_mid_menu",
+		"label": "Select Menu"
+	  },
+      {
+        "type": "checkbox",
+        "id": "payment_enable",
+        "label": "Show Payment",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "payment_image",
+        "label": "Payment Image"
+      },
+	  {
+		"type": "header",
+		"content": "Footer Bottom Area"
+	  },
+	  {
+      	"type": "header",
+      	"content": "Section Padding"
+      },
+	  {
+      	"type": "text",
+      	"id": "section_padding_top_3",
+      	"label": "Section Padding Top",
+      	"default": "20" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+      	"type": "text",
+      	"id": "section_padding_bottom_3",
+      	"label": "Section Padding Bottom",
+      	"default": "20" ,
+      	"info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_bottom_enable",
+        "label": "Show Footer Bottom",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "copy_right",
+        "label": "Copy Right Text"
+      }
+	],
+	"blocks": [
+		{
+          "type": "footer_logo",
+          "name": "Information",
+          "settings": [
+				  {
+					"type": "text",
+					"id": "footer_info_coloum",
+					"label": "Footer Info Coloum Control",
+					"default": "4",
+                    "info": "Follow Bootstrap Column"
+				  },
+                  {
+                      "type": "image_picker",
+                      "id": "footer_logo",
+                      "label": "Footer Logo"
+                  },
+                  {
+                      "type":"textarea",
+                      "id": "footer_description",
+                      "label": "Footer Description"
+                  },
+				  {
+                      "type": "text",
+                      "id": "contact_title",
+                      "label": "Contact Title"
+			     },
+			     {
+                      "type": "textarea",
+                      "id": "contact_info",
+                      "label": "Contact Information",
+                      "default": "169-C, Technohub, Dubai Silicon Oasis.",
+                      "info": "Ex. 169-C, Technohub, Dubai Silicon Oasis."
+			    }
+            ]
+      	},
+		{
+			"type": "footer_menu",
+			"name": "Menu",
+			"settings": [
+				  {
+					"type": "text",
+					"id": "footer_menu_coloum",
+					"label": "Menu Coloum Control",
+					"default": "3",
+                    "info": "Follow Bootstrap Column"
+				  },
+                  {
+                      "type": "text",
+                      "id": "footer_menu_title",
+                      "label": "Menu Title",
+					  "default": "CUSTOMER SERVICE"
+                  },
+                  {
+                      "type": "link_list",
+                      "id": "footer_menu_handle",
+                      "label": "Select Menu"
+                  }
+				]
+		
+
+		}
+
+		]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

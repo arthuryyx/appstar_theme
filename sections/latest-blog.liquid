@@ -1,0 +1,199 @@
+
+<!-- resent-post-area-start -->
+<div class="resent-post-area" id="{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title section-title-4 mr-bttom {% if section.settings.section_border_enable %}section-tittle-border{% endif %}">
+          <h2>{{ section.settings.latest_blog_title }}</h2>
+        </div>
+      </div>	
+      <div class="post-active">
+       {% assign blogs = blogs[section.settings.latest_blog] %} 
+      {% for article in blogs.articles %}
+        <div class="col-lg-12">
+          {% include 'blog-grid-item' %}
+        </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- resent-post-area-end -->
+
+<style>
+ 
+  .resent-post-area{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   .resent-post-area{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+  
+  .mr-bttom h2 {
+    margin-bottom: {{ section.setting.header_title_margin_bottom }};
+}
+  
+  
+</style> 
+
+<script>
+
+/*----------------------------
+ post-active
+------------------------------ */  
+  $("#{{ section.id }} .post-active").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+      items : {{ section.settings.show_blog_post }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.show_blog_post }}],
+	  itemsDesktopSmall : [980,{{ section.settings.show_blog_post }}],
+	  itemsTablet: [768,2],
+	  itemsMobile : [479,1],
+  });
+      
+</script>
+
+{% schema %}
+  {
+    "name": "Latest Blog",
+    "settings": [
+		{
+            "type": "header",
+            "content": "Section Margin"
+        },
+        {
+            "type": "text",
+            "id": "section_margin_top",
+            "label": "Section Margin Top",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+            "type": "text",
+            "id": "section_margin_bottom",
+            "label": "Section Margin Bottom",
+            "default": "0" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+		{
+            "type": "header",
+            "content": "Section Title"
+        },
+		{
+            "type": "text",
+            "id": "latest_blog_title",
+			"label": "Section Title",
+			"default": "Recent Posts"
+        },
+		{
+           "type": "header",
+           "content": "Section Header Border"
+        },
+        {
+           "type": "checkbox",
+           "id": "section_border_enable",
+           "label": "Show Border",
+           "default": true
+        },
+        {
+            "type": "text",
+            "id": "header_title_margin_bottom",
+            "label": "Section Title Margin Bottom",
+            "default": "10" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+           "type": "header",
+           "content": "Blog Slider Contorl"
+        },
+		{
+            "type": "blog",
+            "id": "latest_blog",
+            "label": "select your blog"
+		},
+		{
+          "type": "text",
+          "id": "red_more",
+          "label": "Red More Button",
+		  "default": "Read more"
+
+		},
+        {
+          "type": "select",
+          "id": "show_blog_post",
+          "label": "Show Blog Cursole",
+          "options":[
+            {
+              "value":"1",
+              "label": "1 blog"
+            },
+            {
+              "value":"2",
+              "label": "2 blog"
+            },
+            {
+              "value":"3",
+              "label": "3 blog"
+            },
+            {
+              "value":"4",
+              "label": "4 blog"
+            },
+            {
+              "value":"5",
+              "label": "5 blog"
+            },
+            {
+              "value":"6",
+              "label": "6 blog"
+            },
+            {
+              "value":"7",
+              "label": "7 blog"
+            },
+            {
+              "value":"8",
+              "label": "8 blog"
+            },
+            {
+              "value":"9",
+              "label": "9 blog"
+            },
+            {
+              "value":"10",
+              "label": "10 blog"
+            },
+            {
+              "value":"11",
+              "label": "11 blog"
+            },
+            {
+              "value":"12",
+              "label": "12 blog"
+            }
+
+          ],
+
+          "default": "3"
+        }
+	],
+	"presets":[
+		{
+			"name": "Latest Blog",
+			"category": "Latest Blog"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

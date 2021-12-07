@@ -1,0 +1,50 @@
+
+
+
+<div class="section-title section-title-4 {% if section.settings.section_border_enable_2 %}section-tittle-border{% endif %}">
+  <h2>{{ section.settings.section_title_2 }}</h2>
+</div>
+<div class="iner_feature">
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+      <div class="tab-content">
+
+        {% for block in section.blocks %}
+        {% case  block.type %}
+        {% when 'featured_product' %}
+
+        {% assign collection1 = collections[block.settings.collection_1] %}
+        <div class="tab-pane  {% if forloop.last == true %}active{% endif %}" id="{{ collection1.title | handle }}">
+
+
+          <!-- saleproduct-active-3-start -->
+          <div class="saleproduct-active-3 saleproduct-active-new-3">
+            
+            {% for product in collection1.products %}
+            
+            {% include 'single-feature-product' %}
+            
+            {% endfor %} 
+
+          </div>
+          <!-- saleproduct-active-3-start -->
+        </div>
+        {% endcase %}
+        {% endfor %}
+
+
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+      <div class="thumb-img">
+        {% for block in section.blocks %}
+        {% case  block.type %}
+        {% when 'featured_product' %}
+        {% assign collection1 = collections[block.settings.collection_1] %}
+        <a class="{% if forloop.last == true %}active{% endif %}" href="#{{ collection1.title | handle }}"  data-toggle="tab"><img src="{% if block.settings.featured_img %}{{ block.settings.featured_img | img_url : 'medium' }}{% else %}http:\/\/via.placeholder.com\/400x400 {% endif %}" alt="thum"></a>
+        {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

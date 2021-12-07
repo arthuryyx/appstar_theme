@@ -1,0 +1,391 @@
+
+<!-- product-cookware-area-start -->
+<div class="product-cookware-area product-cookware-area-2" id="product-cookware-area-{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="product-header">
+          <div class="section-title-2">
+            
+            <h2>{{ section.settings.section_title }}</h2>
+            
+            
+          </div>
+          <!-- tab-menu-start -->
+          <div class="tab-menu tab-menu-color text-right">
+            <ul>
+              {% for block in section.blocks %}
+              {% case  block.type %}
+              {% when 'tab_product' %}
+              {% assign collection = collections[block.settings.collection] %}
+              <li class="{% if forloop.first == true %}active{% endif %}"><a href="#{{ section.id }}-{{ collection.title | handle }}" data-toggle="tab">{{ collection.title }}</a></li>
+              {% endcase %}
+              {% endfor %}
+              
+            </ul>
+          </div>
+          <!-- tab-menu-end -->
+        </div>
+        <!-- tab-area-start -->
+        <div class="tab-content">
+          
+          {% for block in section.blocks %}
+          {% case  block.type %}
+          {% when 'tab_product' %}
+          {% assign collection = collections[block.settings.collection] %}
+          <div class="tab-pane {% if forloop.first == true %}active{% endif %}" id="{{ section.id }}-{{ collection.title | handle }}">
+
+            <div class="row">
+              <div class="{% if block.settings.single_banner_enable %}col-lg-9 col-md-8{% else %}col-lg-12 col-md-12{% endif %} col-sm-12 col-xs-12">
+                <div class="inner-box inner-box-2">
+                  <div class="row">
+                    {% if block.settings.tab_menu_enable %}
+                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                      {% include 'tab-menu' %} 
+                    </div>
+                    {% endif %}
+
+                    <div class="{% if block.settings.tab_menu_enable %}col-lg-10 col-md-9{% else %}col-lg-12 col-md-12 tab-border{% endif %} col-sm-9 col-xs-12">
+
+                      <div class="tab-active tab-active-2 tab-active-new-2">
+
+                        {% assign collection = collections[block.settings.collection] %}
+                        {% for product in collection.products %}
+                        {% include 'single-product-tab-2' %}
+                        {% endfor %}
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {% if block.settings.single_banner_enable %}
+              <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                <!-- banner-2-start -->
+                <div class="banner-2">	
+                  {% include 'banner-image-2' %}
+                </div>
+                <!-- banner-2-end -->
+              </div>
+              {% endif %}
+            </div>
+            
+          </div>
+          
+          {% endcase %}
+          {% endfor %}
+          
+          
+        </div>
+        <!-- tab-area-end -->
+        {% if section.settings.saleproduct_active_enable %}
+        <!-- saleproduct-active-start -->
+        <div class="saleproduct-active mt-20 saleproduct-active-2-new-2">
+          
+          {% assign collection = collections[section.settings.collection] %}
+          {% for product in collection.products %}
+          <!-- single-product-start -->
+          {% include 'product-grid-item' %}
+          <!-- single-product-end -->
+          {% endfor %}
+          
+          
+        </div>
+        <!-- saleproduct-active-start -->
+        {% endif %}
+        
+        {% if section.settings.tab_banner_2_enable %}
+        <!-- baner-area-start -->
+        <div class="baner-area mtb-40">
+          <div class="row">
+            {% for block in section.blocks %}
+            {% case  block.type %}
+            {% when 'tab_product_banner' %}
+            {% include 'banner-image-3' %}
+            {% endcase %}
+            {% endfor %}
+
+          </div>
+        </div>
+        <!-- baner-area-end -->
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- product-cookware-area-end -->
+
+<style>
+ 
+  #product-cookware-area-{{ section.id }}.product-cookware-area-2{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   #product-cookware-area-{{ section.id }}.product-cookware-area-2{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+{% if block.settings.tab_menu_enable %} 
+  .tab-active-2 {
+    border-left: 1px solid #e5e5e5;
+ }
+{% endif %}  
+</style> 
+
+
+
+<script>
+ 
+  /*----------------------------
+ tab-active
+------------------------------ */  
+  $("#product-cookware-area-{{ section.id }} .tab-active-new-2").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+      items : {{ section.settings.tab_product_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.tab_product_coloum }}],
+	  itemsDesktopSmall : [980,{{ section.settings.tab_product_coloum }}],
+	  itemsTablet: [768,1],
+	  itemsMobile : [479,1],
+  });
+         
+   /*----------------------------
+ saleproduct-active-2
+------------------------------ */ 
+  
+  
+  $("#product-cookware-area-{{ section.id }} .saleproduct-active-2-new-2").owlCarousel({
+      autoPlay: false, 
+	  slideSpeed:2000,
+	  pagination:false,
+	  navigation:true,	  
+      items : {{ section.settings.product_coloum }},
+	  /* transitionStyle : "fade", */    /* [This code for animation ] */
+	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+      itemsDesktop : [1199,{{ section.settings.product_coloum }}],
+	  itemsDesktopSmall : [992,{{ section.settings.product_coloum }}],
+	  itemsTablet: [768,2],
+	  itemsMobile : [479,1],
+  });
+      
+
+
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "Tab With Menu",
+    "settings": [
+	  {
+         "type": "header",
+         "content": "Section Margin"
+      },
+      {
+         "type": "text",
+         "id": "section_margin_top",
+         "label": "Section Margin Top",
+         "default": "0" ,
+         "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+          "type": "text",
+          "id": "section_margin_bottom",
+          "label": "Section Margin Bottom",
+          "default": "0" ,
+          "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+        "type": "header",
+        "content": "Section Title"
+      },
+	  {
+		"type": "text",
+		"id": "section_title",
+		"label": "Section Title",
+		"default": "Baby Store"
+	  },
+	  {
+        "type": "header",
+        "content": "Tab Product"
+      },
+      {
+        "type": "select",
+        "id": "tab_product_coloum",
+        "label": "Product Limit",
+        "options":[
+          {
+            "value":"1",
+            "label": "1 products"
+          },
+          {
+            "value":"2",
+            "label": "2 products"
+          },
+          {
+            "value":"3",
+            "label": "3 products"
+          }
+
+        ],
+
+        "default": "1"
+      },
+      {
+        "type": "header",
+        "content": "Curcole Product"
+      },
+	  {
+         "type": "checkbox",
+         "id": "saleproduct_active_enable",
+         "label": "Show Curcole Product",
+         "default": true
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "select your collection"
+      },
+      {
+        "type": "select",
+        "id": "product_coloum",
+        "label": "Product Limit",
+        "options":[
+          {
+            "value":"3",
+            "label": "3 products"
+          },
+          {
+            "value":"4",
+            "label": "4 products"
+          },
+          {
+            "value":"5",
+            "label": "5 products"
+          },
+          {
+            "value":"6",
+            "label": "6 products"
+          }
+
+        ],
+
+        "default": "5"
+      },
+      {
+        "type": "header",
+        "content": "Tab Banner"
+      },
+	  {
+         "type": "checkbox",
+         "id": "tab_banner_2_enable",
+         "label": "Show Tab Banner",
+         "default": true
+       }
+
+	],
+    "blocks": [
+	   {
+        "type" : "tab_product",
+        "name" : "tab product",
+        "settings" :[	
+          {
+            "type": "checkbox",
+            "id": "tab_menu_enable",
+            "label": "Show Tab Menu",
+            "default": true
+          },
+		  {
+          "type": "link_list",
+          "id": "tab_menu",
+          "label": "Select Menu"
+	      },
+          {
+            "type" : "collection",
+            "id" : "collection",
+            "label" : "choose collection"
+          },
+		  {
+            "type": "checkbox",
+        	"id": "coundown_enable",
+        	"label": "Show Coundown",
+        	"default": true
+      	 },
+		 {
+			"type": "text",
+			"id": "coundown",
+			"label": "Coundown",
+			"default": "2019/12/16",
+			"info": "yyyy/mm/dd"
+		 },
+	     {
+            "type": "header",
+			"content": "Tab Banner"
+         },
+		 {
+            "type": "checkbox",
+            "id": "single_banner_enable",
+            "label": "Show Banner",
+            "default": true
+         },
+		 {
+            "type": "image_picker",
+            "id": "banner_img",
+            "label": "Image",
+            "info": "Recommended Size: 280 x 470px"
+          },
+		  {
+			"type": "url",
+			"id": "banner_img_url",
+			"label": "URL"
+		  }
+        ]
+
+      },
+	  {
+        "type" : "tab_product_banner",
+        "name" : "tab product banner",
+        "settings" :[	
+		  {
+            "type": "image_picker",
+            "id": "banner_img_2",
+            "label": "Image",
+            "info": "Recommended Size: 570 x 200px"
+          },
+		  {
+			"type": "url",
+			"id": "banner_img_2_url",
+			"label": "URL"
+		  },
+		  {
+		    "type": "text",
+			"id": "banner_coloum",
+			"label": "Banner",
+            "default": "6",
+            "info": "Follow Bootstrap Column"
+		  }
+        ]
+
+      }
+    ],
+	"presets":[
+		{
+			"name": "Tab With Menu",
+			"category": "product"
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

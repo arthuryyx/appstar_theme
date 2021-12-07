@@ -1,0 +1,31 @@
+ <div id="googleMap"></div>
+
+
+<!-- Google Map Api -->
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ section.settings.api_key }}"></script>
+  
+  <!-- googleapis -->
+    <script type="text/javascript">
+      /* Google Map js */
+      function initialize() {
+      var mapOptions = {
+        zoom: 15,
+        scrollwheel: false,
+        center: new google.maps.LatLng({{ section.settings.latlong }})
+      };
+
+      var map = new google.maps.Map(document.getElementById('googleMap'),
+                                    mapOptions);
+
+      var marker = new google.maps.Marker({
+        position: map.getCenter(),
+        animation:google.maps.Animation.BOUNCE,
+        icon: '{% if section.settings.map_icon %}{{ section.settings.map_icon | img_url: "small" }}{% else %}http:\/\/via.placeholder.com\/50x50{% endif %}',
+        map: map
+      });
+
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>

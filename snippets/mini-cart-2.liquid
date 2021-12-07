@@ -1,0 +1,49 @@
+{% assign itemStyle = '' %}{% if cart.item_count == 0 %}{% assign itemStyle = ' style="display:none;"' %}{% endif %}
+{% assign itemEmpty = '' %}{% if cart.item_count == 0 %}{% assign itemEmpty = ' style="display:block;"' %}{% endif %}
+
+<div class="shopping-area">
+  <ul>
+
+    <li class="number"><a href="/cart"><i class="fa fa-shopping-basket"></i>{{ section.settings.my_title }}</a><span class="bigcounter">{{ cart.item_count }}</span>
+
+      <div {{ itemEmpty }} class="shopping-cart cart-empty-title">
+        <h2>{{ 'cart.general.empty' | t }}</h2>
+      </div>
+
+
+      <div {{ itemStyle }} class="shopping-cart mini-cart">
+        <ul>
+          {% for item in cart.items %}
+          <li>
+            <div class="cart-list">
+              <div class="cart-img">
+                <a href="{{ cart.item_url }}" title="Apple Iphone 5s"><img src="{{ item | img_url : 'small' }}" alt="watch" /></a>
+              </div>
+              <div class="cart-info">
+                <h4><a href="{{ item.url }}">{{ item.title }}</a></h4>
+                <div class="cart-price">
+                  <span class="price">{{ item.quantity }} x {{ item.price | money }}</span>
+                </div>
+              </div>
+              <div class="pro-del">
+                <a href="javascript:void(0);" onclick="Shopify.removeItem({{ item.variant.id }})" title="Remove this item"><i class="fa fa-times-circle-o"></i></a>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+
+        <div class="mini-cart-total">
+          <span>{{ settings.cart_total }}</span>
+          <span class="total-price shopping-cart__total">{{ cart.total_price | money }}</span>
+        </div>
+
+        <div class="cart-button">
+          <a href="/cart" title="Cart">View Cart</a>
+          <a href="/checkout" title="Checkout" class="right">Checkout</a>
+        </div>
+      </div>
+      
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,18 @@
+{% if  template != 'cart' %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var x=document.querySelectorAll("input[name='checkout'], button[name='checkout'], input[name='goto_pp'], button[name='goto_pp'], input[name='goto_gc'], button[name='goto_gc'], [href$='checkout']");
+            var teach_bundle_goto_cart = function(e) {
+                e.preventDefault();
+                window.location = '/cart';;
+            };
+            for (var i = 0; i < x.length; i++) {
+                x[i].addEventListener('click', teach_bundle_goto_cart, false);
+            }
+        });
+    </script>
+{% endif %}
+{% if template == 'cart' %}
+    {% include 'tech_bundle_cart' %}
+{% endif %}
+                

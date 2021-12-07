@@ -1,0 +1,198 @@
+
+
+<!-- shop-main-area-start -->
+<div class="shop-main-area">
+  <div class="container">
+    <div class="row">
+      <div class="{% if section.settings.collection_sidebar_position == 'no_sidebar' %}col-lg-12 col-md-12{% else %}col-lg-9 col-md-9{% endif %} col-sm-12 col-xs-12 pull-right">
+        {% assign pagination_limit = section.settings.product_limit_count %}
+        {% paginate collection.products by pagination_limit %}
+        {% if settings.shop_page_title != '' %}
+        <div class="left-title-2">
+           <h3>{{ section.settings.shop_page_title }}</h3>
+        </div>
+        {% endif %}
+        {% include 'collection-sorting' %}
+        <!-- tab-area-start -->
+        <div class="tab-content shop">
+		  {% for product in collection.products %}
+          {% include 'product-list-item' %} 
+		  {% endfor %}
+        </div>
+        
+        <div class="pagenation-area">
+          <div class="page-number">
+           {% include 'pagination' %}
+          </div>
+        </div>
+        {% endpaginate %}
+      </div>
+      {% unless section.settings.collection_sidebar_position == 'no_sidebar' %}
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        {% include 'collection-sidebar' %}
+      </div>
+      {% endunless %}
+    </div>
+  </div>
+</div>
+<!-- shop-main-area-end -->
+
+
+<style>
+ 
+  .shop-main-area{
+    margin-top:{{ section.settings.section_margin_top }}px;
+  }
+   .shop-main-area{
+    margin-bottom:{{ section.settings.section_margin_bottom }}px;
+  }
+  
+  
+</style>
+
+
+
+
+{% schema %}
+  {
+    "name": "Collection List Themplate",
+    "settings": [
+		{
+            "type": "header",
+            "content": "Section Margin"
+        },
+        {
+            "type": "text",
+            "id": "section_margin_top",
+            "label": "Section Margin Top",
+            "default": "80" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+        {
+            "type": "text",
+            "id": "section_margin_bottom",
+            "label": "Section Margin Bottom",
+            "default": "80" ,
+            "info": "Defined in pixels. Do not add the 'px' unit."
+        },
+		{
+		"type": "text",
+		"id": "shop_page_title",
+		"label": "Section Title",
+		"default": "New Arrivals"
+        },
+		{
+        "type": "select",
+        "id": "product_limit_count",
+        "label": "Pagination Limit",
+        "options": [
+        {
+          "label": "3 Product",
+          "value": "3"
+        },
+		{
+          "label": "4 Product",
+          "value": "4"
+        },
+		{
+          "label": "5 Product",
+          "value": "5"
+        },
+		{
+          "label": "6 Product",
+          "value": "6"
+        },
+        {
+          "label": "8 product",
+          "value": "8"
+        },
+        {
+          "label": "9 product",
+          "value": "9"
+        },
+        {
+          "label": "10 product",
+          "value": "10"
+        },
+        {
+          "label": "12 product",
+          "value": "12"
+        },
+        {
+          "label": "14 product",
+          "value": "14"
+        },
+        {
+          "label": "16 product",
+          "value": "16"
+        }
+      ],
+          "default": "9"
+      },
+	  {
+		"type": "paragraph",
+		"content": "Sidebar Widget/List"
+	  },
+	  {
+		"type": "checkbox",
+		"id": "category_enable",
+		"label": "Show Category",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "color_enable",
+		"label": "Show Color",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "brand_enable",
+		"label": "Show Brand",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "product_type_enable",
+		"label": "Show Type",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "size_enable",
+		"label": "Show Size",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "filter_option_enable",
+		"label": "Show Filter Option",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "best_seller_enable",
+		"label": "Show Bestseller",
+		"default": true
+	  },
+      {
+        "type": "checkbox",
+        "id": "banner_area_enable",
+        "label": "Show Banner",
+        "default": true
+      },
+	  {
+		"type": "checkbox",
+		"id": "tag_enable",
+		"label": "Show Tag",
+		"default": true
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

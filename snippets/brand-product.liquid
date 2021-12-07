@@ -1,0 +1,53 @@
+
+
+<div class="section-title {% if section.settings.section_border_enable %}section-tittle-border{% endif %}">
+  <h2>{{ section.settings.section_title }}</h2>
+</div>
+<div class="categorytab-iner">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+        <div class="thuml-img ">
+          {% for block in section.blocks %}
+          {% case  block.type %}
+          {% when 'brand_product' %}
+          {% assign collection = collections[block.settings.collection] %}
+          <a class="{% if forloop.first == true %}active{% endif %}" href="#{{ section.id }}-{{ collection.title | handle }}"  data-toggle="tab"><img src="{% if block.settings.brand_img %}{{ block.settings.brand_img | img_url : 'medium' }}{% else %}http:\/\/via.placeholder.com\/400x400 {% endif %}" alt="brand" /></a>
+          {% endcase %}
+          {% endfor %}
+        </div>
+
+
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+
+      <div class="tab_container tab-content">
+
+        {% for block in section.blocks %}
+        {% case  block.type %}
+        {% when 'brand_product' %}
+
+        <div class="tab-pane {% if forloop.first == true %}active{% endif %}" id="{{ section.id }}-{{ collection.title | handle }}">
+
+          <div class="tab_container-total">
+            {% assign collection = collections[block.settings.collection] %}
+            {% for product in collection.products limit: block.settings.p_limit %}
+
+
+           {% include 'single-brand-product' %}
+            
+            
+            
+            {% endfor %} 
+
+
+          </div>
+
+        </div>
+
+        {% endcase %}
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+{% assign on_sale = false %}
+{% if item.compare_at_price > item.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+
+{% assign on_out = true %}
+{% if item.available %}
+{% assign on_out = false %}
+{% endif %}
+
+{% assign variant = item.selected_or_first_available_variant %}
+{% if item.available %}
+{% assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" %}
+{% endif %} 
+
+
+
+{% if item.featured_image %}
+<div class="products-grid-2 mb-30">
+  <!-- single-product-start -->
+  <div class="single-product-2">
+      {% if on_sale and settings.discount_percent_enable %}
+    <span class="hot-sale">{{ item.price | times: 100 | divided_by: item.compare_at_price | minus: 100 | abs }}%off</span>
+    {% endif %}
+      <!-- product new label/stiker with shortcode start -->
+    {% if item.description contains '[new_products]' %}      
+    {% assign new_products_first = item.description | split:'[/new_products]' | first %}
+    {% assign new_products_final = new_products_first | split:'[new_products]' | last %} 
+
+    {% comment %}Date calculate{% endcomment %}
+    {% assign date_pub_y = item.published_at | date:'%Y' %}
+    {% assign date_pub_d = item.published_at | date:'%j' %}
+    {% assign date_now_y = 'now' | date:'%Y' %}
+    {% assign date_now_d = 'now' | date:'%j' %}
+    {% assign dates_diff_y = date_now_y | minus: date_pub_y | times: 365 %}
+    {% assign dates_diff_d = date_now_d | minus: date_pub_d %}
+    {% assign dates_diff = dates_diff_y | plus: dates_diff_d %}
+    {% assign new_products_period = new_products_final | plus: 0 %} 
+
+    {% if dates_diff <= new_products_period %}
+    <span class="hot-sale new">{{ 'products.product.new' | t }}</span>
+    {% endif %}      
+    {% endif %}
+    <div class="product-img">
+      <a href="{{ item.url }}"><img src="{{ item.featured_image.src | img_url : 'large' }}" alt="img" /></a>
+    </div>
+    
+    <div class="link-button">
+      <ul>
+
+        {% if product.description contains '[affiliate_link]' %}
+        {% assign affiliate_link_first = product.description | split:'[/affiliate_link]' | first %}
+        {% assign affiliate_link_final = affiliate_link_first | split:'[affiliate_link]' | last %}
+        <li>
+          <a href="{{ affiliate_link_final }}"><i class="fa fa-cart-plus"></i></a>
+        </li>
+        <li>{% include 'wishlist-button' %}</li>
+        <li>
+          <a href="javascript:void(0);" class="action-btn quick-view" onclick="quiqview('{{ product.handle | handleize }}')" data-toggle="modal" data-target="#quickViewModal"><i class="fa fa-eye"></i></a>
+        </li>
+        {% else %}
+        <li>
+          <a href="javascript:void(0);" class="action-btn cart cart-item" onclick="{{ func }}; return false;" title="{{ 'products.product.add_to_cart' | t }}">
+            <i class="fa fa-cart-plus"></i>
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <i class="fa fa-check"></i>
+            <i class="fa fa-times"></i>
+          </a>
+        </li>
+        <li>{% include 'wishlist-button' %}</li>
+        <li>
+          <a href="javascript:void(0);" class="action-btn quick-view" onclick="quiqview('{{ product.handle | handleize }}')" data-toggle="modal" data-target="#quickViewModal"><i class="fa fa-eye"></i></a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    
+  </div>
+  <!-- single-product-end -->
+  <!-- product-text-start -->
+  <div class="product-text-2">
+    <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+    <div class="rating">
+      <span class="shopify-product-reviews-badge" data-id="{{ item.id }}"></span>
+    </div>
+    <div class="price">
+      <ul>
+        {% if on_sale %}
+        <li><span class="new-price">{{ item.price | money }}</span></li>
+        <li><span class="old-price">{{ item.compare_at_price | money }}</span></li>
+        {% else %}
+        <li><span class="new-price">{{ item.price | money }}</span></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="product-description">
+      
+    {% if item.description contains '[short_description]' %}
+
+    {% assign short_description_first = item.description | split: '[/short_description]' | first %}
+    {% assign short_description_final = short_description_first | split: '[short_description]' | last %}
+    {{ short_description_final }}
+
+    {% endif %}
+      
+    </div>
+    <a href="{{ item.url }}">Learn More</a>
+  </div>
+  <!-- product-text-end -->
+</div>
+
+{% else %}
+
+
+<div class="products-grid-2 mb-30">
+  <!-- product-text-start -->
+  <div class="product-text-2">
+    <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+    <div class="product-description">
+    {{ item.content | truncatewords: 25 }} 
+    </div>
+  </div>
+  <!-- product-text-end -->
+</div>
+{% endif %}

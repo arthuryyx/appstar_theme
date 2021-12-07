@@ -1,0 +1,102 @@
+{% if section.settings.newslatter_area_enable %}
+
+<!-- newsletter-area-start -->
+<div class="newsletter-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="newsletter-text">
+          <h3>{{ section.settings.newslatter_title }}</h3>
+          <p>{{ section.settings.newslatter_description }}</p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="newsletter-form">
+          <form action="{{ settings.newsletter_action }}" class="subscribe-form validate" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+              <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Your email address" required>
+              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
+              <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="button">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- newsletter-area-end -->
+
+{% endif %}
+
+<style>
+ 
+  .newsletter-area{
+    padding-top:{{ section.settings.section_padding_top }}px;
+  }
+   .newsletter-area{
+    padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  }
+  
+  .newsletter-area {
+    background-color: {{ section.settings.newlatter_background_color }};
+ }
+  
+</style> 
+
+
+{% schema %}
+  {
+    "name": "Newslatter",
+    "settings": [
+	  {
+          "type": "header",
+          "content": "Section Padding"
+      },
+      {
+          "type": "text",
+          "id": "section_padding_top",
+          "label": "Section Padding Top",
+          "default": "35" ,
+          "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+      {
+          "type": "text",
+          "id": "section_padding_bottom",
+          "label": "Section Padding Bottom",
+          "default": "35" ,
+          "info": "Defined in pixels. Do not add the 'px' unit."
+      },
+	  {
+        "type": "color",
+        "id": "newlatter_background_color",
+        "label": "Newlatter Background Color",
+        "default": "#e23e57"
+      },	
+	  {
+          "type": "checkbox",
+          "id": "newslatter_area_enable",
+          "label": "Show Newslatter area",
+          "default": true
+      },
+      {
+        "type": "text",
+        "id": "newslatter_title",
+        "label": "Newsletter Title",
+        "default": "Sign Up for Newsletters"
+      },
+	  {
+        "type": "text",
+        "id": "newslatter_description",
+        "label": "Newsletter Description",
+        "default": "Be the First to Know. Sign up for newsletter today"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

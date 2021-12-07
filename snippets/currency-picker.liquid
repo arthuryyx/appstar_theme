@@ -1,0 +1,15 @@
+
+<li class="common-currency-picker currency">
+  <a><span class="current-currency">{{ shop.currency }}</span><i class="fa fa-angle-down"> </i></a>
+  <div class="dollar-submenu">
+    {% assign currency = settings.supported_currencies | split: '|' %}
+    <ul>
+      {% for value in currency %}
+      {% assign array = value | split: ',' %}
+      {% assign iso_4217 = array[0] | upcase | strip %}
+      {% assign name = array[1] | strip %}
+      <li data-currency="{{ iso_4217 }}" class="currency__item"><a style="cursor: pointer">{{ name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</li>

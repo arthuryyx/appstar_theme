@@ -1,0 +1,248 @@
+<link rel="stylesheet" type="text/css" href="{{ 'jquery.fancybox.css' | asset_url }}"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"> </script>
+<script type="text/javascript">
+  	$(document).ready(function() {
+
+      /* This is basic - uses default settings */
+
+      $("a#single_image").fancybox();
+
+      /* Using custom settings */
+
+      $("a#inline").fancybox({
+          'hideOnContentClick': true
+      });
+
+      /* Apply fancybox to multiple items */
+
+      $("a.group").fancybox({
+          'transitionIn'	:	'elastic',
+          'transitionOut'	:	'elastic',
+          'speedIn'		:	600, 
+          'speedOut'		:	200, 
+          'overlayShow'	:	false
+      });
+	
+	});
+</script>
+
+{% if section.settings.header_style == 'header_style_1' %}
+<header>
+  <!-- header-top-area-start -->
+  {% include 'header-top' %}
+  <!-- header-top-area-end -->
+  <!-- header-min-area-start -->
+  {% include 'header-mid' %}
+  <!-- header-min-area-start -->
+  <!-- header-bottom-area-start -->
+  {% include 'header-bottom' %}
+  <!-- header-bottom-area-end -->
+  <!-- mobile-menu-area-start -->
+ {% include 'mobile-menu' %}
+  <!-- mobile-menu-area-end -->
+</header>
+{% elsif section.settings.header_style == 'header_style_2' %}
+<header class="home-2">
+  {% include 'header-top' %}
+  {% include 'header-mid-2' %}
+  {% include 'header-bottom-2' %}
+  {% include 'mobile-menu' %}
+</header>
+{% elsif section.settings.header_style == 'header_style_3' %}
+<header class="home-3">
+  {% include 'header-top' %}
+  {% include 'header-mid' %}
+  {% include 'header-bottom' %}
+  {% include 'mobile-menu' %}
+</header>
+{% elsif section.settings.header_style == 'header_style_4' %}
+<header class="home-4">
+  {% include 'header-top' %}
+  {% include 'header-mid' %}
+  {% include 'header-bottom' %}
+  {% include 'mobile-menu' %}
+</header>
+{% endif %}
+
+
+
+{% if section.settings.stickey_header_enable %}
+
+<script>      
+       
+ /*----------------------------
+ TOP Menu Stick
+------------------------------ */
+$(window).on('scroll',function() {
+if ($(this).scrollTop() > 120){  
+    $('#sticky-header').addClass("sticky");
+  }
+  else{
+    $('#sticky-header').removeClass("sticky");
+  }
+}); 
+  
+
+window.onload = function() {
+    changeSortBy('sale-descending');
+};
+
+
+</script>
+
+{% endif %}
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+	  {
+		"type": "header",
+		"content": "Header Style"
+	  },
+	  {
+          "type": "radio",
+          "id": "header_style",
+          "label": "Header Style",
+          "options":[
+            {
+            	"value":"header_style_1",
+           	 	"label": "Style 1"
+            },
+            {
+            	"value":"header_style_2",
+            	"label": "Style 2"
+            },
+            {
+            	"value":"header_style_3",
+            	"label": "Style 3"
+            },
+            {
+            	"value":"header_style_4",
+            	"label": "Style 4"
+            }
+
+          ],
+
+         "default": "header_style_1"
+      },
+      {
+		"type": "header",
+		"content": "Header Top Area"
+	  }, 
+	  {
+		"type": "checkbox",
+		"id": "header_top_enable",
+		"label": "Show Header Top",
+		"default": true
+	  },
+	  {
+		"type": "textarea",
+		"id": "header_top_left_title",
+		"label": "Header Top Title",
+		"default": "England's Fastest Online Shopping Destination"
+	  },
+	  {
+		"type": "link_list",
+		"id": "header_top_menu",
+		"label": "Select Menu"
+	  },
+	  {
+		"type": "header",
+		"content": "Header Mid Area"
+	  },
+      {
+        "type": "header",
+        "content": "Header Stickey"
+      },
+      {
+        "type": "checkbox",
+        "id": "stickey_header_enable",
+        "label": "Stickey Header Enable",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Upload Logo",
+		"info": "Recommended Size: 194 x 58px"
+      }, 
+	  {
+		"type": "checkbox",
+		"id": "header_search_enable",
+		"label": "Show Search",
+		"default": true
+	  },
+	  {
+		"type": "checkbox",
+		"id": "wishlist_enable",
+		"label": "Show Wishlist",
+		"default": true
+	  },
+	  {
+		"type": "text",
+		"id": "wishlist_title",
+		"label": "Wishlist Title",
+		"default": "Wishlist Cart"
+	  },
+	  {
+		"type": "text",
+		"id": "my_title",
+		"label": "My Cart Title",
+		"default": "My Cart"
+	  },
+	  {
+		"type": "header",
+		"content": "Header Bottom Area"
+	  },
+	  {
+		"type": "text",
+		"id": "category_title",
+		"label": "Category Title",
+		"default": "Category"
+	  },
+	  {
+		"type": "link_list",
+		"id": "catetory_menu",
+		"label": "Select Menu"
+	  },
+	  {
+		"type": "header",
+		"content": "Header Style 2"
+	  },
+	  {
+		"type": "text",
+		"id": "contact_icon",
+		"label": "Contact Icon",
+		"default": "remote-control-alt"
+	  },
+	  {
+		"type": "url",
+		"id": "contact_icon_url",
+		"label": "URL"
+	  },
+	  {
+		"type": "text",
+		"id": "contact_number",
+		"label": "Contact Number",
+		"default": "888 345 6789"
+	  },
+	  {
+		"type": "textarea",
+		"id": "contact_description",
+		"label": "Contact Description",
+		"default": "We support online 24 hours a day"
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

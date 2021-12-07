@@ -1,0 +1,36 @@
+{% layout none %}
+{% assign discount_price_on = shop.metafields.techbundle_settings.apply_discount_on %}
+{% for item in search.results %}
+<li dicount="{{shop.metafields.techbundle_settings.app_status_1}}">
+<div class="tech_bundle_product_main">                 
+	<a href="/products/{{item.handle}}">
+    	<img src="{{ item | img_url: "large" }}">
+    </a>                 
+    <div style="text-align: center;">
+    	<h6>{{ item.title }}</h6>                  	
+        <select id="tech_bundle_selected_varient_{{item.id}}" class="tech_bundle_select_varients">
+        {% for variant in item.variants %}
+         	{% if variant.available %}
+          		{% if variant.compare_at_price != blank  %}
+						{% assign discount_price_on_apply = variant.compare_at_price %}
+			        {% else %}
+						{% assign discount_price_on_apply = variant.price %}
+          			{% endif %}
+          		{% if discount_price_on == '1' or discount_price_on == 'true' %} 			
+					{% assign discount_price_on_apply = variant.price %}
+				{% endif %}
+            	<option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}" data-orignal-price="{{variant.price}}"  data-price="{{discount_price_on_apply}}" data-price-cry="{{discount_price_on_apply}}">
+                {{ variant.title }}
+                </option>
+            {% else %}
+            	<option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+            {% endif %}
+        {% endfor %}                      
+        </select>
+        <div class="tech_bundle_qty">QTY: <span id="tech_bundle_qty_{{item.id}}"></span></div>        
+        <span id="tech_bundle_price_{{item.id}}"></span>
+      	<div><s id="tech_bundle_orignal_price_{{item.id}}"></s></div>        
+     </div>
+</div>
+</li>
+{% endfor %}

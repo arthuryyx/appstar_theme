@@ -1,0 +1,51 @@
+<div class="Category-area">
+  <h3><i class="fa fa-bars"></i>{{ section.settings.category_title }}</h3>
+  <div class="category-menu {% unless template == 'index' %}category-none{% endunless %}">
+
+    <nav>
+      <ul>
+		
+        {% assign catetory_menu_handle = section.settings.catetory_menu %}
+        {% for link in linklists[catetory_menu_handle].links %}
+        {% assign child_list_handle = link.title | handleize %}
+        {% if linklists[child_list_handle].links != "" %}
+        <li class="angle"><a href="{{ link.url }}">{{ link.title }}</a>
+
+          <ul class="category-submenu">
+
+            {% for childlink in linklists[child_list_handle].links %}
+            {% assign grand_childlist_handle = childlink.title | handleize %}
+            {% if linklists[grand_childlist_handle] and linklists[grand_childlist_handle].links.size > 0 %}
+
+            <li><a href="{{ childlink.url }}" class="title">{{childlink.title }}</a>
+
+              <ul>
+                {% for grand_childlist_handle in linklists[grand_childlist_handle].links %}
+                <li><a href="{{grand_childlist_handle.url}}">{{grand_childlist_handle.title}}</a></li>
+                {% endfor %}
+              </ul>
+
+            </li>
+
+            {% elsif childlink.type == "collection_link" and childlink.object.image %}
+            <li class="menu-img"><a href="{{ childlink.url }}" class="title"><img src="{{ childlink.object.image | img_url: 'large' }}" alt="collection Image"></a></li>
+
+            {% else %}
+            <li><a href="{{ childlink.url }}" class="title">{{ childlink.title }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+          </ul>
+
+        </li>
+        {% else %}
+        <li class="{% if link.active %}angle{% endif %}"><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        <li class="side-show"><a href="#"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle "></i>More Categories</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</div>

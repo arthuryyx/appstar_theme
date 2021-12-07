@@ -1,0 +1,5 @@
+<div class="col-lg-{{ block.settings.banner_coloum }} col-md-{{ block.settings.banner_coloum }} col-sm-{{ block.settings.banner_coloum }} col-xs-12">
+  <div class="banner-img">
+    <a href="{{ block.settings.banner_img_2_url }}"><img src="{% if block.settings.banner_img_2 %}{{ block.settings.banner_img_2 | img_url: 'master' }}{% else %}http:\/\/via.placeholder.com\/ 570x200{% endif %}" alt="bannner" /></a>
+  </div>
+</div>
